@@ -23,3 +23,7 @@ $ npx create-react-app react-stydy
 
 **特别注意**
 if语句/switch-case 语句/变量声明语句，这些叫做语句，不是表达式，不能出现在{}中！
+
+#### JSX列表渲染
+**实现**
+使用map方法
