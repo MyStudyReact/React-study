@@ -12,7 +12,11 @@ import App from './App';
 // 渲染根组件App 到  id为'Root'的dom节点上
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // React18 严格模式节点需要去掉
+  // 会影响 useEffct的执行时机  会检测额外的副作用 所以每一个useEffct 都会执行两次
+
+
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
 );
