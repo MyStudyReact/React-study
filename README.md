@@ -45,6 +45,21 @@ if语句/switch-case 语句/变量声明语句，这些叫做语句，不是表�
 
 
 #### JSX样式控制
+
+##### 多个类名进行使用
+1. 字符串拼接，双引号里面名字前面要加一个空格
+```javascript
+<span className={'hate ' + item.attitude === -1 ? 'hated' : ''}>
+```
+2. 字符串模板拼接,变量前加一个空格
+```javascript
+<span className={`hate ${item.attitude} === -1 ? 'hated' : ''`}>
+```
+3. 写成数组逗号隔开，join方法括号里面加一个空格
+```javascript
+<span className={['hate', item.attitude === -1 ? 'hated' : ''].join(' ')}>
+```
+
 **特别注意**
 > 类名不用class 用的是className
 > 使用比较多的是类名
