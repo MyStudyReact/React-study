@@ -1,4 +1,8 @@
 # 学习React
+> 源码地址：https://gitee.com/react-cp/react-pc-code
+> React基础讲义: https://www.yuque.com/fechaichai/qeamqf/xbai87
+> React和Mobx讲义: https://www.yuque.com/fechaichai/qeamqf/apomum
+> ReactPc项目讲义: https://www.yuque.com/fechaichai/tzzlh1
 ## React基础
 ### 环境初始化
 #### 使用脚手架创建项目
@@ -6,9 +10,10 @@
 $ npx create-react-app react-stydy
 ```
 > 说明
-> 1. npx create-react-app 是固定命令，`create-react-app`是React脚手架固定的名称
-> 2. react-stydy 表示项目名称，可以自定义，保持语义
-> 3. npx命令会帮助我们临时安装create-react-app包，然后初始化项目完成之后会自动删掉，所以不需要全局安装create-react-app
+> 1. npx是执行Node软件包的工具，它从 npm5.2版本开始，就与npm捆绑在一起
+> 2. npx create-react-app 是固定命令，`create-react-app`是React脚手架固定的名称
+> 3. react-stydy 表示项目名称，可以自定义，保持语义
+> 4. npx命令会帮助我们临时安装create-react-app包，然后初始化项目完成之后会自动删掉，所以不需要全局安装create-react-app
 
 ### JSX基础
 #### JSX中使用js表达式
