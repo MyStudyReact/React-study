@@ -9,6 +9,9 @@ const style = {
   fontSize: '50px'
 }
 
+// 动态控制className,满足条件才有
+const activeFlag = false
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +21,7 @@ function App() {
 
       <h3 className='active'>测试类名样式</h3>
 
+      <h2 className={activeFlag ? 'active' : ''}>动态控制className</h2>
     </div>
   );
 }
