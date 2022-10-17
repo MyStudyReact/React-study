@@ -28,3 +28,4 @@ on + 事件名称 = { 事件处理程序 } ，比如：`<div onClick={ onClick }
 - 注意点
 react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 2. 获取事件对象
+> 获取事件对象e只需要在 事件的回调函数中 补充一个形参e即可拿到
