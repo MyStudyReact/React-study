@@ -9,11 +9,6 @@ class HelloComponent extends React.Component {
   }
 }
 
-/**
- * 渲染标签的方式，命名方式必须和函数名对应,且必须大写
- * <HelloComponent></HelloComponent>
- */
-
 
 function App () {
   return (
