@@ -2,12 +2,27 @@
 import React from "react"
 // 函数组件的创建和渲染
 //创建
-const clickFun = () => {
-  console.log('函数组件中的事件被触发了')
+const clickFun = (e, msg) => {
+  // 阻止默认行为
+  e.preventDefault()
+  // 传递自定义参数
+  console.log('函数组件中的事件被触发了', msg)
 }
 
+/**
+ * 如何传递自定义参数？
+ * 1.只需要一个额外参数 (只需改成箭头函数)
+ * {clickFun}  ---> {() => clickFun()}
+ * 
+ * 2.既需要事件对象e,又需要额外的参数
+ * {() => clickFun()}  ---> {(e) => clickFun(e,'自定义参数')}
+ */
 function Hello () {
-  return <div onClick={clickFun}>Hello</div>
+  return (
+    <div >
+      <a href="http://baidu.com" onClick={(e) => clickFun(e, 'hhh')}>百度</a>
+    </div>
+  )
 }
 
 // 类组件的创建和渲染
