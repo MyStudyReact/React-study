@@ -88,10 +88,52 @@ class App extends React.Component {
     })
   }
 
-  //
+  // 删除回调
   delComment = (id) => {
     this.setState({
       list: this.state.list.filter(item => item.id !== id)
+    })
+  }
+
+  // 切换喜欢
+  toggleLick = (curItem) => {
+    // 逻辑：如果是1 就改成0 否则改为1 ---attitude
+    console.log(curItem, '===curItem')
+    //attitude id(作为修改谁的判断条件)
+    const { id, attitude } = curItem
+    this.setState({
+      list: this.state.list.map(item => {
+        /**
+         * 判断条件
+         * 如果item.id === id，把item的attitude属性修改一下
+         * 否则就原样返回
+         */
+        if (item.id === id) {
+          item.attitude = attitude === 1 ? 0 : 1
+
+          // return {
+          //   ...item,
+          //   attitude: attitude === 1 ? 0 : 1
+          // }
+        }
+        // else{
+        //   return item
+        // }
+        return item
+      })
+    })
+  }
+
+  //切换
+  toggleHate = (curItem) => {
+    const { id, attitude } = curItem
+    this.setState({
+      list: this.state.list.map(item => {
+        if (item.id === id) {
+          item.attitude = attitude === -1 ? 0 : -1
+        }
+        return item
+      })
     })
   }
 
@@ -154,10 +196,16 @@ class App extends React.Component {
                     <p className="text">{item.comment}</p>
                     <div className="info">
                       <span className="time">{formatDate(item.time)}</span>
-                      <span className={item.attitude === 1 ? 'like liked' : 'like'}>
+                      <span
+                        className={item.attitude === 1 ? 'like liked' : 'like'}
+                        onClick={() => this.toggleLick(item)}
+                      >
                         <i className="icon" />
                       </span>
-                      <span className={item.attitude === -1 ? 'hate hated' : 'hate'}>
+                      <span
+                        className={item.attitude === -1 ? 'hate hated' : 'hate'}
+                        onClick={() => this.toggleHate(item)}
+                      >
                         <i className="icon" />
                       </span>
                       <span className="reply btn-hover" onClick={() => this.delComment(item.id)} >删除</span>
