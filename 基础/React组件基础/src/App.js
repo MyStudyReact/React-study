@@ -1,71 +1,38 @@
-
 import React from 'react'
-class Counter extends React.Component {
+
+class InputComponent extends React.Component {
+  // 1.声明一个用来控制input value属性的react组件自己的状态
   state = {
-    count: 0,
-    list: [1, 2, 3, 4, 5],
-    person: {
-      name: 'jack',
-      age: '20',
-    }
-  }
-  changeCount = (e, operate) => {
-    e.preventDefault()
-    if (operate === 'add') {
-      this.setState({
-        count: this.state.count + 1
-      })
-    } else {
-      this.setState({
-        count: this.state.count - 1
-      })
-    }
+    message: '今晚上一定要早睡'
   }
 
-  changeList = (e) => {
-    e.preventDefault()
-    this.setState({
-      // list: [...this.state.list, 6, 7]
-      list: this.state.list.splice(1, this.state.list.length - 1)
-    })
+  // 回调函数
+  changeMessage = (e) => {
+    // 4.拿到输入框最近的值，交给state中的message
+    this.setState({ message: e.target.value })
   }
 
-  changePerson = (e) => {
-    e.preventDefault()
-    this.setState({
-      person: { ...this.state.person, name: 'rose' }
-    })
-  }
-
+  // 产出UI模板结构
   render () {
     return (
       <>
-        <div>{this.state.count}</div>
-        <button onClick={(e) => this.changeCount(e, 'add')}>+</button>
-        <button onClick={(e) => this.changeCount(e, 'sub')}>+</button>
-
-        <hr />
-
-        <ul>
-          {this.state.list.map((item, index) => <li key={index}>{item}</li>)}
-        </ul>
-        <button onClick={(e) => this.changeList(e)}>改变数组</button>
-
-        <hr />
-
-        <div>姓名：{this.state.person.name}</div>
-        <div>年龄：{this.state.person.age}</div>
-        <button onClick={(e) => this.changePerson(e)}>改变对象</button>
+        {/* 2.给input框的value属性绑定 react stete */}
+        {/* 3.给input框绑定一个change的事件，为了拿到当前输入框的数据 */}
+        <input
+          type='text'
+          value={this.state.message}
+          onChange={this.changeMessage}
+        ></input>
       </>
     )
   }
 }
 
+// 根组件
 function App () {
   return (
     <div>
-      {/* 渲染Counter */}
-      <Counter></Counter>
+      <InputComponent></InputComponent>
     </div>
   )
 }
