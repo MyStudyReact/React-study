@@ -1,6 +1,7 @@
 import './index.css'
 import avatar from './images/avatar.png'
 import React from 'react'
+import { v4 as uuid } from "uuid"
 
 // 时间格式化
 function formatDate (time) {
@@ -69,7 +70,7 @@ class App extends React.Component {
       list: [
         ...this.state.list,
         {
-          id: 1, //一个独一无二的值
+          id: uuid(), //一个独一无二的值
           author: 'Alice',
           comment: this.state.comment,
           time: new Date(),
