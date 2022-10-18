@@ -148,3 +148,8 @@ react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 > 这里我们作为了解内容，随着js标准的发展，主流的写法已经变成了`class fields`，无需考虑太多this问题
 
 ![image](https://user-images.githubusercontent.com/54365306/196343307-ba185bfe-35fc-40d8-96d4-114b6560f79e.png)
+
+
+###### React的状态不可变
+`目标任务:`能够理解不可变的意义并且知道在实际开发中如何修改状态
+> 概念：不要直接修改状态的值，而是基于当前状态创建新的状态值
