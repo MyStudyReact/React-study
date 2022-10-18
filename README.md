@@ -153,3 +153,4 @@ react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 ###### React的状态不可变
 `目标任务:`能够理解不可变的意义并且知道在实际开发中如何修改状态
 > 概念：不要直接修改状态的值，而是基于当前状态创建新的状态值
+> 类似于微信小程序修改值 https://blog.csdn.net/weihaifeng163/article/details/122696014
