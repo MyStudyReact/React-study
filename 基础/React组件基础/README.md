@@ -53,7 +53,7 @@ react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 - 通过this.state来获取状态 
 1. 修改状态
 - 语法
-this.setState({ 要修改的部分数据 }) 
+`this.setState({ 要修改的部分数据 })`
 - setState方法作用 
   a. 修改state中的数据状态
   b. 更新UI
