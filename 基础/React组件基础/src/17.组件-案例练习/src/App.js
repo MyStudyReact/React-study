@@ -4,7 +4,7 @@ import React from 'react'
 
 // 时间格式化
 function formatDate (time) {
-  return `${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`
+  return `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()}`
 }
 
 class App extends React.Component {
@@ -48,14 +48,42 @@ class App extends React.Component {
         // 1: 点赞 0：无态度 -1:踩
         attitude: -1
       }
-    ]
+    ],
+    comment: '' //评论框中的内容
   }
 
   // tab切换回调
   switchTab = (type) => {
     // e.preventDefault()
+
+    //实现思路：点击谁就把谁的type属性交给state中的active
     this.setState({
       active: type
+    })
+  }
+
+  //发布回调
+  submitComment = () => {
+    // 提交评论 state.list后面添加一项新的数据
+    this.setState({
+      list: [
+        ...this.state.list,
+        {
+          id: 1, //一个独一无二的值
+          author: 'Alice',
+          comment: this.state.comment,
+          time: new Date(),
+          // 1: 点赞 0：无态度 -1:踩
+          attitude: 0
+        },
+      ]
+    })
+  }
+
+  //受控组件的回调
+  textareaChange = (e) => {
+    this.setState({
+      comment: e.target.value
     })
   }
 
@@ -88,13 +116,16 @@ class App extends React.Component {
               <img className="user-head" src={avatar} alt="" />
             </div>
             <div className="textarea-container">
+              {/* 输入框 受控组件 */}
               <textarea
                 cols="80"
                 rows="5"
                 placeholder="发条友善的评论"
                 className="ipt-txt"
+                value={this.state.comment}
+                onChange={this.textareaChange}
               />
-              <button className="comment-submit">发表评论</button>
+              <button className="comment-submit" onClick={this.submitComment}>发表评论</button>
             </div>
             <div className="comment-emoji">
               <i className="face"></i>
