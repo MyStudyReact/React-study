@@ -44,6 +44,8 @@ react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 ## 组件状态
 `目标任务:`能够为组件添加状态和修改状态的值
 > 一个前提：在React hook出来之前，函数式组件是没有自己的状态的，所以我们统一通过类组件来讲解
+![image](https://user-images.githubusercontent.com/54365306/196343681-a60755b3-02a2-4e5e-877b-a590a24d3a04.png)
+
 1. 初始化状态
 - 通过class的实例属性state来初始化 
 - state的值是一个对象结构，表示一个组件可以有多个数据状态
@@ -59,3 +61,7 @@ this.setState({ 要修改的部分数据 })
 数据驱动视图，也就是只要修改数据状态，那么页面就会自动刷新，无需手动操作dom 
 - 注意事项
 **不要直接修改state中的值，必须通过setState方法进行修改**
+
+**this问题说明**
+![image](https://user-images.githubusercontent.com/54365306/196343959-43f86911-bd6d-4a90-bd8a-31c4d916734c.png)
+这里我们作为了解内容，随着js标准的发展，主流的写法已经变成了`class fields`，无需考虑太多this问题
