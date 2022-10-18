@@ -63,6 +63,13 @@ class App extends React.Component {
     })
   }
 
+  //受控组件的回调
+  textareaChange = (e) => {
+    this.setState({
+      comment: e.target.value
+    })
+  }
+
   //发布回调
   submitComment = () => {
     // 提交评论 state.list后面添加一项新的数据
@@ -81,10 +88,10 @@ class App extends React.Component {
     })
   }
 
-  //受控组件的回调
-  textareaChange = (e) => {
+  //
+  delComment = (id) => {
     this.setState({
-      comment: e.target.value
+      list: this.state.list.filter(item => item.id !== id)
     })
   }
 
@@ -153,7 +160,7 @@ class App extends React.Component {
                       <span className={item.attitude === -1 ? 'hate hated' : 'hate'}>
                         <i className="icon" />
                       </span>
-                      <span className="reply btn-hover">删除</span>
+                      <span className="reply btn-hover" onClick={() => this.delComment(item.id)} >删除</span>
                     </div>
                   </div>
                 </div>
