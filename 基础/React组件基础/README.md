@@ -26,6 +26,7 @@
 1. **类名称也必须以大写字母开头,且为驼峰**
 2. 类组件应该继承 React.Component 父类，从而使用父类中提供的方法或属性
 3. 类组件必须提供 render 方法render 方法必须有返回值，表示该组件的 UI 结构
+4. 类里面不需要用const/let/var 关键词来声明变量和方法
 
 ## 函数组件的事件绑定
 `目标任务:`能够独立绑定任何事件并能获取到事件对象e
@@ -46,7 +47,7 @@ react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 > - 使用的时候: 需要借助this关键词获取
 **特别注意**
 > 之所以要采取class Fields写法是为了保证this的指向正确 永远指向当前的组件实例
-> 不需要用const let去定义，直接写事件名
+> 不需要用const/let/var关键词去声明，直接写事件名
 
 ## 组件状态
 `目标任务:`能够为组件添加状态和修改状态的值
@@ -93,3 +94,13 @@ react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 2. 将状态数据设置为input标签元素的value属性的值
 3. 为input添加change事件，在事件处理程序中，通过事件对象e获取到当前文本框的值（即用户当前输入的值）
 4. 调用setState方法，将文本框的值作为state状态的最新值
+
+### 2. 非受控表单组件
+> 什么是非受控组件？
+> 非受控组件就是通过手动操作dom的方式获取文本框的值，文本框的状态不受react组件的state中的状态控制，直接通过原生dom获取输入框的值
+
+**实现步骤**
+1. 导入createRef 函数
+2. 调用createRef函数，创建一个ref对象，存储到名为msgRef的实例属性中
+3. 为input添加ref属性，值为msgRef
+4. 在按钮的事件处理程序中，通过msgRef.current即可拿到input对应的dom元素，而其中msgRef.current.value拿到的就是文本框的值
