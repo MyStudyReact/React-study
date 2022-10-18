@@ -1,74 +1,48 @@
-
-import React from "react"
-// 函数组件的创建和渲染
-//创建
-const clickFun = (e, msg) => {
-  // 阻止默认行为
-  e.preventDefault()
-  // 传递自定义参数
-  console.log('函数组件中的事件被触发了', msg)
-}
-
-/**
- * 如何传递自定义参数？
- * 1.只需要一个额外参数 (只需改成箭头函数)
- * {clickFun}  ---> {() => clickFun()}
- * 
- * 2.既需要事件对象e,又需要额外的参数
- * {() => clickFun()}  ---> {(e) => clickFun(e,'自定义参数')}
- */
-function Hello () {
-  return (
-    <div >
-      <a href="http://baidu.com" onClick={(e) => clickFun(e, 'hhh')}>百度</a>
-    </div>
-  )
-}
-
-// 类组件的创建和渲染
-//创建
-
-/**
- * 类组件中的事件绑定
- * 整体的套路都是一致的 和函数组件没有太多不同
- * 唯一需要注意的 因为处于class 类环境下 所以定义事件回调函数 以及 绑定它写法上有不同
- * 定义的时候: class Fields语法  
- * 使用的时候: 需要借助this关键词获取
- */
-class HelloComponent extends React.Component {
-  // class Fields
-  // 写组件里面是实例，需要加this获取上下文 （标准写法,箭头函数避免this指向问题）
-  clickHandler = (msg) => {
-    // 这里的this指向的是正确的当前的组件实例对象 
-    // 可以非常方便的通过this关键词拿到组件实例身上的其他属性或者方法
-    console.log('类组件中的事件被触发了', this, msg)
+import React from 'react'
+//组件状态 类组件作为演示
+class TestComponent extends React.Component {
+  // 1.定义组件状态
+  state = {
+    // 在这里可以定义各种属性。全都是当前组件的状态
+    name: '去沈阳？去长春？去北上广？'
   }
+
+  //事件的回调函数
+  changeName = () => {
+    // 3.修改state中的状态name
+    // 注意：不可以直接被赋值修改，必须通过一个方法 setState
+    // this.state.name = '要前途还是要她'
+    this.setState({
+      name: '要前途还是要她'
+    })
+  }
+
   render () {
+    // 2.使用状态
     return (
       <div>
-        <div onClick={() => this.clickHandler('xxx1')}>this is class Component</div>
+        this is TestComponent
+        <div>当前的状态：{this.state.name}</div>
 
-        <div onClick={() => clickHandler('xxx2')}>this is class Component</div>
+        <button onClick={this.changeName}>修改name</button>
       </div>
     )
   }
 }
 
-// 注意事项: 之所以要采取class Fields写法是为了保证this的指向正确 永远指向当前的组件实例
-
-// 事件绑定函数（标准写法）
-const clickHandler = (msg) => {
-  // 这里的this 不指向当前的组件实例对象  undefined 存在this丢失问题
-  console.log('类组件中的事件被触发了', this, msg)
-}
+/**
+ * 总结：
+ * 1. 编写组件其实就是编写原生js类或者函数
+ * 2. 定义状态必须通过state 实例属性的方式，提供一个对象，名称是固定的为state
+ * 3. 修改state中的任何属性，都不可以通过直接赋值，必须走setState方法，
+ * 这个方法来自于继承React.Component 得到
+ * 4. 这里的this 关键词很容易出现指向错误的情况，上面的写法是最推荐和最规范的，没有this指向问题
+ */
 
 function App () {
   return (
     <div>
-      {/* 渲染hello组件 */}
-      <Hello></Hello>
-      {/* 渲染类组件 */}
-      <HelloComponent></HelloComponent>
+      <TestComponent></TestComponent>
     </div>
   )
 }
