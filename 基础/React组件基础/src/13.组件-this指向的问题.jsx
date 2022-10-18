@@ -16,9 +16,6 @@ class Test extends React.Component {
     console.log(this)
   }
   render () {
-    // render函数中的this已经被react内部做了修正
-    // 这里的this就是指向当前的组件实例对象
-    // 那我们的箭头函数中的this 直接沿用 所以也是指向组件的实例对象
     console.log('父函数中的this指向为：', this)
     return (
       // this有问题的写法
