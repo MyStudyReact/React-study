@@ -1,7 +1,10 @@
 # 学习React
 > 源码地址：https://gitee.com/react-cp/react-pc-code
+
 > React基础讲义: https://www.yuque.com/fechaichai/qeamqf/xbai87
+
 > React和Mobx讲义: https://www.yuque.com/fechaichai/qeamqf/apomum
+
 > ReactPc项目讲义: https://www.yuque.com/fechaichai/tzzlh1
 
 ## React基础
@@ -117,6 +120,7 @@ react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 ###### 组件状态
 `目标任务:`能够为组件添加状态和修改状态的值
 > 一个前提：在React hook出来之前，函数式组件是没有自己的状态的，所以我们统一通过类组件来讲解
+
 ![image](https://user-images.githubusercontent.com/54365306/196343150-e91ca8ed-bcfb-4705-b6dc-7ac07a1ff3b7.png)
 
 1. 初始化状态
@@ -136,4 +140,5 @@ this.setState({ 要修改的部分数据 })
 **不要直接修改state中的值，必须通过setState方法进行修改**
 **this问题说明**
 > 这里我们作为了解内容，随着js标准的发展，主流的写法已经变成了`class fields`，无需考虑太多this问题
+
 ![image](https://user-images.githubusercontent.com/54365306/196343307-ba185bfe-35fc-40d8-96d4-114b6560f79e.png)
