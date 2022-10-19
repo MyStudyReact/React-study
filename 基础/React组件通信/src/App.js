@@ -1,58 +1,46 @@
-// 1.导入createContext方法并执行，结构提供者和消费者
-import React, { createContext } from "react"
+import React from "react"
+import './app.css'
 
-/**
- * App -> A -> C
- * 
- * App里的数据直接传给C
- * 
- * 注意事项：
- * 1.上层组件和下层组件是相对的，只要存在就可以使用，通常我们都会通过app作为数据提供方法
- * 2.这里设计到的语法都是固定的，有两处，提供的位置（value提供数据），获取的位置{value => 使用value做什么都可以}
- */
-
-
-// const context = createContext()
-
-// context包含 Provider,Consumer
-const { Provider, Consumer } = createContext()
-
-function ComA () {
+// 渲染列表
+function ListItem (props) {
+  const { listItem, delItem } = props
   return (
-    <>
-      <h1> this is divA</h1>
-
-      <hr />
-
-      <ComC />
-    </>
-  )
-}
-
-function ComC () {
-  return (
-    <h1> this is divc
-      {/* 通过Consumer使用数据 */}
-      <Consumer>
-        {value => <div>{value}</div>}
-      </Consumer>
-    </h1>
+    <div className="card" key={listItem.id}>
+      <div className="info">
+        <h3>标题：{listItem.name}</h3>
+        <p>价格：{listItem.price}</p>
+        <p>消息：{listItem.info}</p>
+      </div>
+      <button className="delBtn" onClick={() => delItem(listItem.id)}>删除</button>
+    </div>
   )
 }
 
 
+
+// 数据提供者 渲染ListItem 组件 App套着ListItem
+// 先不抽离组件，完成基础渲染之后再去抽离
 class App extends React.Component {
   state = {
-    mesage: 'this is mesage'
+    list: [
+      { id: 1, name: '超级好吃的棒棒糖', price: 18.8, info: '开业大酬宾，全场8折' },
+      { id: 2, name: '超级好吃的大鸡腿', price: 34.2, info: '开业大酬宾，全场8折' },
+      { id: 3, name: '超级无敌的冰激凌', price: 14.2, info: '开业大酬宾，全场8折' }
+    ]
   }
+
+  //给子组件传递的函数
+  delItem = (id) => {
+    this.setState({
+      list: this.state.list.filter(item => item.id !== id),
+    })
+  }
+
   render () {
     return (
-      // 2.使用Provider包裹跟组件
-      <Provider value={this.state.mesage}>
-        <>
-          <ComA />
-        </>
-      </Provider>
+      <div>
+        {this.state.list.map(item => <ListItem key={item.id} listItem={item} delItem={this.delItem}></ListItem>)}
+      </div>
     )
   }
 }
