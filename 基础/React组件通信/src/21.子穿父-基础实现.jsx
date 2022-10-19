@@ -9,9 +9,17 @@ import React from "react"
 
 // 父组件定义一个函数，作为参数传递给子组件，子组件触发触发该函数，将子组件的值作为参数给父组件这个函数使用
 function SonFun ({ getSonMsg }) {
+  function clickHandler () {
+    const sonMsg = '这是来自子组件的数据'
+    getSonMsg(sonMsg)
+
+    // getSonMsg('来自于子组件的数据')
+  }
   return (
     <>
-      <button onClick={() => getSonMsg('来自于子组件的数据')}>this is Son</button>
+      <button onClick={clickHandler}>this is Son</button>
+
+      {/* <button onClick={() => getSonMsg('来自于子组件的数据')}>this is Son</button> */}
     </>
   )
 }
