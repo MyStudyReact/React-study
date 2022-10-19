@@ -36,6 +36,9 @@ function SonFun ({ msg, list, userInfo, getMsg, child }) {
   )
 }
 
+// 这里的写法就是原生的函数语法 props也是一个普通的js对象
+// 所以原生支持的写法 这里都是可以的 放心大胆的写
+
 class App extends React.Component {
   state = {
     message: 'this a message',
