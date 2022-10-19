@@ -202,3 +202,11 @@ react事件采用驼峰命名法，比如：onMouseEnter、onFocus
 3.  子组件中通过 `props` 接收父组件中传过来的数据 
   a. 类组件使用this.props获取props对象
   b. 函数式组件直接通过参数获取props对象
+
+### props说明
+`目标任务:`知道props传递时的一些注意事项
+1.  props是只读对象（readonly）--和`Vue`一样
+根据单项数据流的要求，子组件只能读取props中的数据，不能进行修改(谁的数据谁改)
+2. props可以传递任意数据
+数字、字符串、布尔值、数组、对象、`函数`、`JSX`
+> JSX相当于Vue的插槽
