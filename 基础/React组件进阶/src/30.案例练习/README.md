@@ -1,4 +1,7 @@
 ## todoMVC
+
+> 运用json-server 模拟接口
+
 案例仓库地址：[https://gitee.com/react-course-series/react-todo-mvc](https://gitee.com/react-course-series/react-todo-mvc)<br />1- 克隆项目到本地 
 ```bash
 $ git clone  https://gitee.com/react-course-series/react-todo-mvc.git
