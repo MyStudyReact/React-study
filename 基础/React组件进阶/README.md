@@ -106,11 +106,11 @@ class List extends Component {
 
 ![life1.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1654490729034-d2d80cce-7fab-4dd8-bcbc-29e33bdffb63.png#clientId=u3ca1a750-0855-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u5060710c&name=life1.png&originHeight=320&originWidth=1342&originalType=binary&ratio=1&rotation=0&showTitle=false&size=12812&status=done&style=none&taskId=u930de835-d57a-4e69-ba5a-fc8ff247f9e&title=)
 
-| 钩子 函数         | 触发时机                                            | 作用                                                          |
-| ----------------- | --------------------------------------------------- | ------------------------------------------------------------- |
-| constructor       | 创建组件时，最先执行，初始化的时候只执行一次        | 1. 初始化state  2. 创建 Ref 3. 使用 bind 解决 this 指向问题等 |
-| render            | 每次组件渲染都会触发                                | 渲染UI（**注意： 不能在里面调用setState()** ）                |
-| componentDidMount | 组件挂载（完成DOM渲染）后执行，初始化的时候执行一次 | 1. 发送网络请求   2.DOM操作                                   |
+| 钩子 函数         | 触发时机                                                                       | 作用                                                          |
+| ----------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| constructor       | 创建组件时，最先执行，初始化的时候只执行一次                                   | 1. 初始化state  2. 创建 Ref 3. 使用 bind 解决 this 指向问题等 |
+| render            | 每次组件渲染都会触发                                                           | 渲染UI（**注意： 不能在里面调用setState()** ）                |
+| componentDidMount | 组件挂载（完成DOM渲染）后执行，初始化的时候执行一次 **（类似于Vue的mounted）** | 1. 发送网络请求   2.DOM操作                                   |
 
 ### 生命周期 - 更新阶段
 `目标任务:`  能够说出组件的更新阶段的钩子函数以及执行时机
