@@ -1,5 +1,40 @@
 import React from 'react'
 
+class Test extends React.Component {
+  /**
+   * 如果数据是组件的状态需要去影响视图  定义state中
+   * 如果是自己需要的数据状态，不和视图绑定，则定义成一个普通的实例属性即可
+   * 
+   * state中尽量保持精简
+   */
+  timer = null
+
+  /**
+   * 组件卸载（从页面中消失）
+   * 
+   * 作用：
+   * 执行清理工作（比如：清理定时器等）
+   */
+  componentDidMount () {
+    this.timer = setInterval(() => {
+      console.log('定时器开启')
+    }, 1000)
+  }
+  componentWillUnmount () {
+    console.log('componentWillUnmount')
+
+    //清除定时器
+    clearInterval(this.timer)
+  }
+
+  render () {
+    return (
+      <h1>Test</h1>
+    )
+  }
+}
+
+
 class App extends React.Component {
   /**
    * 创建组件时，最先执行，初始化的时候只执行一次 
@@ -22,11 +57,13 @@ class App extends React.Component {
   // 可以在外面写
   state = {
     count: 0,
+    flag: true,
   }
 
   clickHandler = () => {
     this.setState({
-      count: this.state.count + 1
+      count: this.state.count + 1,
+      flag: !this.state.flag,
     })
   }
 
@@ -44,6 +81,16 @@ class App extends React.Component {
   }
 
   /**
+   * 组件更新后（DOM渲染完毕）
+   * 
+   * 作用：
+   * DOM操作，可以获取到更新后的DOM内容，不要直接调用setState
+   */
+  componentDidUpdate () {
+    console.log('componentDidUpdate')
+  }
+
+  /**
    * 每次组件渲染都会触发
    * 
    * 作用：渲染UI
@@ -52,7 +99,12 @@ class App extends React.Component {
     console.log('render')
     return (
       <>
-        <h1 onClick={this.clickHandler}>{this.state.count}</h1>
+        <div onClick={this.clickHandler}>
+          <h1>{this.state.count}</h1>
+
+          {/* 通过一个数据状态的切换，让Test组进行销毁重建，就会发生组件卸载 */}
+          {this.state.flag ? (<Test></Test>) : null}
+        </div>
       </>
     )
   }
