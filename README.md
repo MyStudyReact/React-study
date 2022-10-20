@@ -344,3 +344,21 @@ function List({pageSize = 10}) {
 // 不传入pageSize属性
 <List />
 ```
+
+### 2.类组件
+> 使用类静态属性声明默认值，static defaultProps = {}
+```JSX
+class List extends Component {
+  static defaultProps = {
+    pageSize: 10
+  }
+  render() {
+    return (
+      <div>
+        此处展示props的默认值：{this.props.pageSize}
+      </div>
+    )
+  }
+}
+<List />
+```
