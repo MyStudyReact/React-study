@@ -326,3 +326,21 @@ optionalObjectWithShape: PropTypes.shape({
 ```
 
 官网文档更多阅读：https://reactjs.org/docs/typechecking-with-proptypes.html
+
+### props校验-默认值
+`目标任务:` 掌握如何给组件的props提供默认值
+> 通过 defaultProps 可以给组件的props设置默认值，在未传入props的时候生效
+#### 1. 函数组件
+> 直接使用函数参数默认值
+```JSX
+function List({pageSize = 10}) {
+  return (
+    <div>
+      此处展示props的默认值：{ pageSize }
+    </div>
+  )
+}
+
+// 不传入pageSize属性
+<List />
+```
