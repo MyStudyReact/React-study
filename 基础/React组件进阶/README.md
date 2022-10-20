@@ -100,3 +100,31 @@ class List extends Component {
 }
 <List />
 ```
+
+### 生命周期 - 挂载阶段
+`目标任务:`  能够说出在组件挂载阶段执行的钩子函数和执行时机
+
+![life1.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1654490729034-d2d80cce-7fab-4dd8-bcbc-29e33bdffb63.png#clientId=u3ca1a750-0855-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u5060710c&name=life1.png&originHeight=320&originWidth=1342&originalType=binary&ratio=1&rotation=0&showTitle=false&size=12812&status=done&style=none&taskId=u930de835-d57a-4e69-ba5a-fc8ff247f9e&title=)
+
+| 钩子 函数         | 触发时机                                            | 作用                                                          |
+| ----------------- | --------------------------------------------------- | ------------------------------------------------------------- |
+| constructor       | 创建组件时，最先执行，初始化的时候只执行一次        | 1. 初始化state  2. 创建 Ref 3. 使用 bind 解决 this 指向问题等 |
+| render            | 每次组件渲染都会触发                                | 渲染UI（**注意： 不能在里面调用setState()** ）                |
+| componentDidMount | 组件挂载（完成DOM渲染）后执行，初始化的时候执行一次 | 1. 发送网络请求   2.DOM操作                                   |
+
+### 生命周期 - 更新阶段
+`目标任务:`  能够说出组件的更新阶段的钩子函数以及执行时机
+
+![life2.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1654490742583-b933202d-3de7-41ae-b9ba-75ae1d2af34c.png#clientId=u3ca1a750-0855-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u16a98d25&name=life2.png&originHeight=261&originWidth=1331&originalType=binary&ratio=1&rotation=0&showTitle=false&size=10692&status=done&style=none&taskId=u62f8fb7c-1679-4410-91e8-2652e06036c&title=)
+
+| 钩子函数           | 触发时机                  | 作用                                                         |
+| ------------------ | ------------------------- | ------------------------------------------------------------ |
+| render             | 每次组件渲染都会触发      | 渲染UI（与 挂载阶段 是同一个render）                         |
+| componentDidUpdate | 组件更新后（DOM渲染完毕） | DOM操作，可以获取到更新后的DOM内容，**不要直接调用setState** |
+
+### 生命周期 - 卸载阶段
+`目标任务:`  能够说出组件的销毁阶段的钩子函数以及执行时机
+
+| 钩子函数             | 触发时机                 | 作用                               |
+| -------------------- | ------------------------ | ---------------------------------- |
+| componentWillUnmount | 组件卸载（从页面中消失） | 执行清理工作（比如：清理定时器等） |
