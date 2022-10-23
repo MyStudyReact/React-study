@@ -78,7 +78,7 @@ useEffect函数的作用就是为react函数组件提供副作用处理的！
 ### 3. 依赖项控制执行时机
 `本节任务:` 能够学会使用依赖项控制副作用的执行时机
 
-**1. 不添加依赖项**
+#### 1. 不添加依赖项
 
 > 组件首次渲染执行一次，以及不管是哪个状态更改引起组件更新时都会重新执行
 > 1. 组件初始渲染
@@ -89,7 +89,7 @@ useEffect(()=>{
 })
 ```
 
-**2. 添加空数组**
+#### 2. 添加空数组
 组件只在首次渲染时执行一次
 ```JSX
 useEffect(()=>{
@@ -97,7 +97,7 @@ useEffect(()=>{
 },[])
 ```
 
-**3. 添加特定依赖项**
+#### 3. 添加特定依赖项
 > 副作用函数在首次渲染时执行，在依赖项发生变化时重新执行
 ```JSX
 useEffect(() => {    
@@ -107,3 +107,32 @@ useEffect(() => {
 
 **注意事项**
 useEffect 回调函数中用到的数据（比如，count）就是依赖数据，就应该出现在依赖项数组中，如果不添加依赖项就会有bug出现
+
+#### 4. 清理副作用
+> 如果想要清理副作用 可以在副作用函数中的末尾return一个新的函数，在新的函数中编写清理副作用的逻辑
+> 注意执行时机为：
+> 1. 组件卸载时自动执行
+> 2. 组件更新时，下一个useEffect副作用函数执行之前自动执行
+```JSX
+import { useEffect, useState } from "react"
+
+const App = () => {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setCount(count + 1)
+    }, 1000)
+    return () => {
+      // 用来清理副作用的事情
+      clearInterval(timerId)
+    }
+  }, [count])
+  return (
+    <div>
+      {count}
+    </div>
+  )
+}
+
+export default App
+```
