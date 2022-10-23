@@ -19,3 +19,25 @@ const [name, setName] = useState(()=>{
 **语法选择**
 1. 如果就是初始化一个普通的数据 直接使用 useState(普通数据) 即可
 2. 如果要初始化的数据无法直接得到需要通过计算才能获取到，使用useState(()=>{})
+
+## useEffect - 发送网络请求
+`本节任务:`能够掌握使用useEffect hook发送网络请求
+**使用场景**
+> 如何在useEffect中发送网络请求，并且封装同步 async await操作
+**语法要求**
+> 不可以直接在useEffect的回调函数外层直接包裹 await ，因为**useEffect是一个同步函数**
+```JavaScript
+useEffect(async ()=>{    
+    const res = await axios.get('http://geek.itheima.net/v1_0/channels')   
+    console.log(res)
+},[])
+```
+**正确写法**
+> 在内部单独定义一个函数，然后把这个函数包装成同步
+```JSX
+useEffect(()=>{   
+    async function fetchData(){      
+       const res = await axios.get('http://geek.itheima.net/v1_0/channels')                            console.log(res)   
+    } 
+},[])
+```
