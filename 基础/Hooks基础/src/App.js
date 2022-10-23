@@ -1,31 +1,18 @@
-import { useState, useEffect } from 'react'
-
-
-function Test () {
-  useEffect(() => {
-    let timer = setInterval(() => {
-      console.log('定时器执行了！')
-    }, 1000)
-
-    //清理定时器
-    return () => {
-      // 清除的动作
-      clearInterval(timer)
-    }
-  }, [])
-  return (
-    <div>444</div>
-  )
-}
+import { useWindowScroll } from './hooks/useWindowScroll'
+import { useLocalStorage } from './hooks/useLocalStorage'
 
 function App () {
-  const [flag, setFlag] = useState(true)
+  const [y] = useWindowScroll()
+
+  const [message, setMessage] = useLocalStorage('hook-key', '胡思乱想')
+
+  setTimeout(() => {
+    setMessage('好好生活')
+  }, 5000)
 
   return (
-    <div>
-      {flag ? <Test /> : null}
-
-      <button onClick={() => setFlag(!flag)}>switch</button>
+    <div style={{ height: '12000px' }}>
+      {y} ----{message}
     </div>
   )
 }
