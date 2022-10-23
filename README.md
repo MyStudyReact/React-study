@@ -611,3 +611,11 @@ useEffect(()=>{
 2. 执行 useRef 函数并传入null，返回值为一个对象 内部有一个current属性存放拿到的dom对象（组件实例）
 通过ref 绑定 要获取的元素或者组件
 3. 函数组件由于没有实例，不能使用ref获取，如果想获取组件实例，必须是类组件
+
+### seContext
+`本节任务:`能够掌握hooks下的context使用方式
+
+**实现步骤**
+1. 使用createContext 创建Context对象
+2. 在顶层组件通过Provider 提供数据
+3. 在底层组件通过useContext函数获取数据
