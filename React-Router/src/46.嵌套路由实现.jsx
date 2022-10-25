@@ -4,7 +4,7 @@ import Login from './pages/Login.jsx'
 import Board from './componts/Board.jsx'
 import Article from './componts/Article.jsx'
 
-import { HashRouter, BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 //进行路由配置
 function App () {

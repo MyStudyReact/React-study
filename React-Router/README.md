@@ -188,3 +188,26 @@ const Layout = () => {
   )
 }
 ```
+
+## 8. 404路由配置
+> 场景：当url的路径在整个路由配置中都找不到对应的path，使用404兜底组件进行渲染
+
+1- 准备一个NotFound组件
+```jsx
+const NotFound = () => {
+  return <div>this is NotFound</div>
+}
+
+export default NotFound
+```
+```jsx
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Board />} />
+      <Route path="article" element={<Article />} />
+    </Route>
+    <Route path="*" element={<NotFound />}></Route>
+  </Routes>
+</BrowserRouter>
+```
