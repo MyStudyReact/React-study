@@ -620,6 +620,60 @@ useEffect(()=>{
 2. 在顶层组件通过Provider 提供数据
 3. 在底层组件通过useContext函数获取数据
 
+# Router
+## 1. 准备项目环境
+> create-react-app(cra) 是用 webpack 打包的
+> vite: 可以实现cra同等能力 但是速度更快的打包工具  [尤大]
+> 使用vite新增一个React项目，然后安装一个v6版本的react-router-dom
+```bash
+# 创建react项目
+$ npm create vite react-router --template react
+
+# 安装所有依赖包
+$ npm i
+
+# 启动项目
+$ npm run dev
+
+# 安装react-router包
+$ npm i react-router-dom@6
+```
+## 2. 基础使用
+> 需求:  准备俩个按钮，点击不同按钮切换不同组件内容的显示
+> 实现步骤：
+> 1. 导入必要的路由router内置组件
+> 2. 准备俩个React组件
+> 3. 按照路由的规则进行路由配置
+
+```JSX app.jsx
+// 引入必要的内置组件
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+
+// 准备俩个路由组件
+
+const Home = () => <div>this is home</div>
+const About = () => <div>this is about</div>
+
+function App() {
+  return (
+    <div className="App">
+      {/* 按照规则配置路由 */}
+      <BrowserRouter>
+        <Link to="/">首页</Link>
+        <Link to="/about">关于</Link>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  )
+}
+
+export default App
+```
+**注意：如果外部引入，引用的两个组件的后缀为jsx**
+
 # React Hook 入门到精通（ useState | useReduce、useEffect、useContext、useRef、useCallback | useMemo ）
 
 **Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。**
