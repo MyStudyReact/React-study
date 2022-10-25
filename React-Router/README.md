@@ -76,3 +76,33 @@ export default App
 > 作用: 用于定义路由路径和渲染组件的对应关系  [element：因为react体系内 把组件叫做react element]
 
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1659241285534-d317335f-03ef-4792-b68e-2735852e53f9.png#clientId=uef430495-3869-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&height=164&id=u5f6d9be0&margin=%5Bobject%20Object%5D&name=image.png&originHeight=218&originWidth=1048&originalType=binary&ratio=1&rotation=0&showTitle=false&size=32559&status=error&style=none&taskId=u32c89a35-dce6-4e8b-96d9-dc523fd5794&title=&width=786)<br />其中path属性用来指定匹配的路径地址，element属性指定要渲染的组件，图中配置的意思为: 当url上访问的地址为 /about 时，当前路由发生匹配，对应的About组件渲染
+
+## 4. 编程式导航
+> 声明式 【 Link to】  vs  编程式 【调用路由方法进行路由跳转】
+> 概念:  通过js编程的方式进行路由页面跳转，比如说从首页跳转到关于页
+> 实现步骤：
+> 1. 导入一个 useNavigate 钩子函数
+> 2. 执行 useNavigate 函数 得到 跳转函数
+> 3. 在事件中执行跳转函数完成路由跳转
+
+
+```jsx
+// 导入useNavigate函数
+import { useNavigate } from 'react-router-dom'
+const Home = () => {
+  // 执行函数
+  const navigate = useNavigate()
+  return (
+    <div>
+      Home
+      <button onClick={ ()=> navigate('/about') }> 跳转关于页 </button>
+    </div>
+  )
+}
+
+export default Home
+```
+注: 如果在跳转时不想添加历史记录，可以添加额外参数replace 为true
+```javascript
+navigate('/about', { replace: true } )
+```
