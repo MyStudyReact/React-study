@@ -2,13 +2,14 @@
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 
-import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
+import { HashRouter, BrowserRouter, Link, Routes, Route } from 'react-router-dom'
 
 //进行路由配置
 function App () {
   return (
-    // 声明当前要用一个非hash模式的路由，如果是hash 就是 hashRouter
-    <BrowserRouter>
+    // 声明当前要用一个非hash模式的路由，如果是hash 就是 HashRouter
+    // <BrowserRouter>
+    <HashRouter>
 
       {/* 指定跳转的组件 to用来配置路由地址 */}
       <Link to="/">首页</Link>
@@ -20,7 +21,7 @@ function App () {
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/about" element={<About></About>}></Route>
       </Routes>
-    </BrowserRouter >
+    </HashRouter >
   )
 }
 

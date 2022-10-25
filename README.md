@@ -674,6 +674,15 @@ export default App
 ```
 **注意：如果外部引入，引用的两个组件的后缀为jsx**
 
+## 3. 核心内置组件说明
+### 1. BrowerRouter
+> 作用: 包裹整个应用，一个React应用只需要使用一次
+
+| **模式**           | **实现方式**                   | **路由url表现**               |
+| ------------------ | ------------------------------ | ----------------------------- |
+| HashRouter         | 监听url hash值实现             | http://localhost:3000/#/about |
+| BrowerRouter(推荐) | h5的 history.pushState API实现 | http://localhost:3000/about   |
+
 # React Hook 入门到精通（ useState | useReduce、useEffect、useContext、useRef、useCallback | useMemo ）
 
 **Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。**
