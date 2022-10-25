@@ -158,3 +158,33 @@ const Layout = () => {
 export default Layout
 ```
 
+## 7. 默认二级路由
+> 场景: 应用首次渲染完毕就需要显示的二级路由
+> 实现步骤:
+> 1. 给默认二级路由标记index属性
+> 2. 把原本的路径path属性去掉
+
+```jsx
+<Routes>
+  <Route path="/"  element={<Layout/>}>
+    <Route index element={ <Board/> } />
+    <Route path="article" element={ <Article/> } />
+  </Route>
+</Routes>
+```
+```jsx
+import { Outlet } from 'react-router-dom'
+
+const Layout = () => {
+  return (
+    <div>
+      layout
+      { /* 默认二级不再具有自己的路径  */ }
+      <Link to="/">board</Link>
+      <Link to="/article">article</Link>
+      { /* 二级路由出口 */ }
+      <Outlet/>
+    </div>
+  )
+}
+```
