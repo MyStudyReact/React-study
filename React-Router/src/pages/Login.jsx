@@ -14,6 +14,9 @@ function Login () {
 
     //searchParams传参
     // navigate('/about?id=1001')
+
+    //params传参
+    navigate('/about/1001')
   }
   return (
     <div>

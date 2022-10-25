@@ -20,7 +20,11 @@ function App () {
       <Routes>
         {/* 指定路径和组件的对应关系，path代表路径，element代表组件 */}
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/about" element={<About></About>}></Route>
+
+        {/* params 传参和Vue写法一样 */}
+        <Route path="/about/:id" element={<About></About>}></Route>
+        {/* <Route path="/about" element={<About></About>}></Route> */}
+
         <Route path="/Login" element={<Login></Login>}></Route>
       </Routes>
     </HashRouter >

@@ -114,3 +114,9 @@ navigate('/about', { replace: true } )
 **路由传参**![image.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1659242510791-9cd4d107-f2fc-47ff-87dc-af9418940ae9.png#clientId=uef430495-3869-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&id=u771d1d6e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=186&originWidth=639&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16426&status=error&style=none&taskId=u3d8d8118-1b96-46ce-b826-4ac129a479f&title=)
 **路由取参**![image.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1659242531089-90eb0bbb-1aa8-4bcf-89dd-5332c6d49ab2.png#clientId=uef430495-3869-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&id=u95a2584a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=222&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21488&status=error&style=none&taskId=u4c83abf4-e892-40cb-83ef-cadf42459cb&title=)
 
+
+### 2. params传参
+**路由传参**![image.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1659242608059-40cce1de-3700-422d-b4ef-b4ada61c4152.png#clientId=uef430495-3869-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&id=u647c4d42&margin=%5Bobject%20Object%5D&name=image.png&originHeight=186&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=14036&status=error&style=none&taskId=u15d870aa-e3d9-4a27-8e31-a76577c86fd&title=)
+
+**路由取参**![image.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1659242647823-818d12d4-1be8-4e2a-bbe6-2bcf8ddd614c.png#clientId=uef430495-3869-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&id=u5a55485a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=222&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17807&status=error&style=none&taskId=ucf1c097d-4c38-42ec-b1b1-e7320f53d50&title=)
+
