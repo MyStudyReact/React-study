@@ -64,7 +64,7 @@ useEffect(()=>{
 # React Hook 入门到精通（ useState | useReduce、useEffect、useContext、useRef、useCallback | useMemo ）
 
 **Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。**
-## useState | useReduce 的使用
+## useState | useReducer 的使用
 ```JSX
 import React, { useState, useReducer } from 'react'
  
