@@ -8,8 +8,12 @@ function Login () {
   function goAbout () {
     // 3.调用我们的跳转函数，传入我们的目标路径
     // navigate('/about')
+
     // 加上replace 就不需要历史数据了
-    navigate('/about', { replace: true })
+    // navigate('/about', { replace: true })
+
+    //searchParams传参
+    // navigate('/about?id=1001')
   }
   return (
     <div>
