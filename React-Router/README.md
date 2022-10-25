@@ -120,3 +120,41 @@ navigate('/about', { replace: true } )
 
 **路由取参**![image.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1659242647823-818d12d4-1be8-4e2a-bbe6-2bcf8ddd614c.png#clientId=uef430495-3869-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=paste&id=u5a55485a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=222&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17807&status=error&style=none&taskId=ucf1c097d-4c38-42ec-b1b1-e7320f53d50&title=)
 
+## 6. 嵌套路由
+> 场景：在我们做的很多的管理后台系统中，通常我们都会设计一个Layout组件，在它内部实现嵌套路由
+
+![无标题-2022-07-27-1257.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1659243096808-094c30b7-53d4-4f34-ab2a-3e6ad06e3aac.png#clientId=uef430495-3869-4&crop=0&crop=0&crop=1&crop=1&errorMessage=unknown%20error&from=drop&height=520&id=u3a8e8d6a&margin=%5Bobject%20Object%5D&name=%E6%97%A0%E6%A0%87%E9%A2%98-2022-07-27-1257.png&originHeight=693&originWidth=995&originalType=binary&ratio=1&rotation=0&showTitle=false&size=808064&status=error&style=none&taskId=u7f5e741d-e63c-45f7-9a8e-6c48e23979c&title=&width=746)<br />实现步骤：
+
+1. App.js中定义嵌套路由声明
+2. Layout组件内部通过 <Outlet/> 指定二级路由出口
+
+- App.js组件中定义路由嵌套关系
+```jsx
+<Routes>
+  <Route path="/"  element={<Layout/>}>
+    <Route path="board" element={ <Board/> } />
+    <Route path="article" element={ <Article/> } />
+  </Route>
+   { /* 省略部分  */ }
+</Routes>
+```
+
+- Layout.js组件中使用 Outlet 组件添加二级路由出口
+```jsx
+import { Outlet } from 'react-router-dom'
+
+const Layout = () => {
+  return (
+    <div>
+      layout
+      { /* 二级路由的path等于 一级path + 二级path  */ }
+      <Link to="/board">board</Link>
+      <Link to="/article">article</Link>
+      { /* 二级路由出口 */ }
+      <Outlet/>
+    </div>
+  )
+}
+export default Layout
+```
+
