@@ -264,3 +264,30 @@ function App() {
 
 export default App
 ```
+
+## 路由懒加载
+### 1.React.lazy
+> - 通过lazy() api来动态import需要懒加载的组件
+> - import的组件目前只支持export default的形式导出
+> - Suspense来包裹懒加载的组件进行加载，可以设置fallback现实加载中效果
+> - React.lazy可以结合Router来对模块进行懒加载
+
+```JSX
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+const Home = lazy(() => import('./routes/Home'))
+const AnyComponent = lazy(() => import('./routes/AnyComponent'))
+ 
+...
+return (
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/anyManage" component={AnyComponent}/>
+        ...
+      </Switch>
+    </Suspense>
+  </Router>
+)
+```
