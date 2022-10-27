@@ -832,6 +832,59 @@ export default NotFound
 </BrowserRouter>
 ```
 
+## 9. 集中式路由配置
+> 场景: 当我们需要路由权限控制点时候, 对路由数组做一些权限的筛选过滤，所谓的集中式路由配置就是用一个数组统一把所有的路由对应关系写好替换 本来的Roues组件
+```JSX
+import { BrowserRouter, Routes, Route, useRoutes } from 'react-router-dom'
+
+import Layout from './pages/Layout'
+import Board from './pages/Board'
+import Article from './pages/Article'
+import NotFound from './pages/NotFound'
+
+// 1. 准备一个路由数组 数组中定义所有的路由对应关系
+const routesList = [
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        element: <Board />,
+        index: true, // index设置为true 变成默认的二级路由
+      },
+      {
+        path: 'article',
+        element: <Article />,
+      },
+    ],
+  },
+  // 增加n个路由对应关系
+  {
+    path: '*',
+    element: <NotFound />,
+  },
+]
+
+// 2. 使用useRoutes方法传入routesList生成Routes组件
+function WrapperRoutes() {
+  let element = useRoutes(routesList)
+  return element
+}
+
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        {/* 3. 替换之前的Routes组件 */}
+        <WrapperRoutes />
+      </BrowserRouter>
+    </div>
+  )
+}
+
+export default App
+```
+
 # React Hook 入门到精通（ useState | useReduce、useEffect、useContext、useRef、useCallback | useMemo ）
 
 **Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。**
