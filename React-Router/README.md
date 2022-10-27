@@ -283,8 +283,8 @@ return (
   <Router>
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/anyManage" component={AnyComponent}/>
+        <Route exact path="/" element={Home}/>
+        <Route path="/anyManage" element={AnyComponent}/>
         ...
       </Switch>
     </Suspense>

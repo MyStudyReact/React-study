@@ -1,8 +1,8 @@
-import Layout from './componts/Layout.jsx'
+import Layout from './components/Layout.jsx'
 import Login from './pages/Login.jsx'
 
-import Board from './componts/Board.jsx'
-import Article from './componts/Article.jsx'
+import Board from './components/Board.jsx'
+import Article from './components/Article.jsx'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 

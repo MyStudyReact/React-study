@@ -3,18 +3,18 @@ import { useRoutes } from 'react-router-dom'
 // 引入lazy函数，懒加载函数，以及要配合Suspense组件一起使用才能实现懒加载
 import { lazy, Suspense } from "react"
 
-// import Layout from "../componts/Layout"
-// import Board from "../componts/Board"
-// import Article from "../componts/Article"
+// import Layout from "../components/Layout"
+// import Board from "../components/Board"
+// import Article from "../components/Article"
 
 // import Login from "../pages/Login"
 // import About from "../pages/About"
 // import NotFound from '../pages/NotFound'
 
 // 使用懒加载引入组件
-const Layout = lazy(() => import("../componts/Layout"))
-const Board = lazy(() => import("../componts/Board"))
-const Article = lazy(() => import("../componts/Article"))
+const Layout = lazy(() => import("../components/Layout"))
+const Board = lazy(() => import("../components/Board"))
+const Article = lazy(() => import("../components/Article"))
 
 const Login = lazy(() => import('../pages/Login'))
 const About = lazy(() => import('../pages/About'))
