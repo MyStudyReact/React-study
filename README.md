@@ -911,6 +911,120 @@ return (
 )
 ```
 
+### 2.react-loadable
+> react-loadable是以组件级别来分割代码的，这意味着，我们不仅可以根据路由按需加载，还可以根据组件按需加载，使用方式和路由分割一样，只用修改组件的引入方式即可
+#### 1.安装
+```bash
+npm i react-loadable
+```
+#### 2、使用
+```JSX
+import React from 'react';
+import Loadable from 'react-loadable';
+	
+const LoadableComponent = Loadable({
+	loader: () => import('需要加载的异步组件路径'),
+	loading(){
+	    return 加载过程中显示的内容
+	},
+});
+	
+export default ()=><LoadableComponent />
+```
+### 3、将原本路由组件替换成改异步组件
+> 将原本导入的组件换成该组件即可
+	
+### 4、若原本路由组件使用了路由的属性(props.history等)
+> 在换成异步组件的时候,本身要使用withRouter导入路由组件的属性
+> 因为现在的路由组件是异步组件
+
+**代码示例:**
+```JSX
+// 路由懒加载（异步组件）
+import Loadable from 'react-loadable';
+//通用过场组件
+const LoadingComponent = () => {
+  return (
+    <div>loading</div>
+  )
+}
+...
+export default (loader, loading=LoadingComponent) => {
+  return Loadable({
+    loader,
+    loading
+  })
+}
+ 
+//Route中调用
+import { BrowserRouter, Route } from 'react-router-dom'
+const loadable from './loadable';
+const AnyComponent = loadable(() => import('./AnyComponent'))
+const Routes = () => (
+  <BrowserRouter>
+    <Route path="/home" component={AnyComponent}/>
+  </BrowserRouter>
+);
+export default Routes;
+```
+**以下是老版中的方法**
+
+### 3.webpack配置中使用lazyload-loader
+```JSX
+// webpack 配置中
+module: {
+ rules: [
+ {
+ test: /.(js|jsx)$/,,
+ use: [
+ 'babel-loader',
+ 'lazyload-loader'
+ ]
+},
+ 
+// 业务代码中
+// 使用lazy! 前缀 代表需要懒加载的Router
+ import Shop from 'lazy!./src/view/Shop';
+ // Router 正常使用
+ <Route path="/shop" component={Shop} />
+```
+
+### 4.import() webpack v2+
+> 符合ECMAScript提议的import()语法，该提案与普通 import 语句或 require 函数的类似，但返回一个 Promise 对象
+
+```JSX
+function component() {
+ return import( /* webpackChunkName: "lodash" */ 'lodash').then(_ => {
+ var element = document.createElement('div');
+ element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+ return element;
+ }).catch(error => 'An error occurred while loading the component');
+}
+// 或者使用async
+async function getComponent() {
+ var element = document.createElement('div');
+ const _ = await import(/* webpackChunkName: "lodash" */ 'lodash');
+ element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+ return element;
+}
+```
+
+### 5.requre.ensure webpack v1 v2
+```JSX
+require.ensure([], function(require){
+ var list = require('./list');
+ list.show();
+，'list');
+<!-- Router -->
+const Foo = require.ensure([], () => {
+ require("Foo");
+}, err => {
+ console.error("We failed to load chunk: " + err);
+}, "chunk-name");
+//react-router2 or 3
+<Route path="/foo" getComponent={Foo} />
+```
+
 # React Hook 入门到精通（ useState | useReduce、useEffect、useContext、useRef、useCallback | useMemo ）
 
 **Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。**
