@@ -265,7 +265,7 @@ function App() {
 export default App
 ```
 
-## 路由懒加载
+## 10.路由懒加载
 ### 1.React.lazy
 > - 通过lazy() api来动态import需要懒加载的组件
 > - import的组件目前只支持export default的形式导出
