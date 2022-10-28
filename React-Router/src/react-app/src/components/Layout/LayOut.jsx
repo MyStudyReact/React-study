@@ -9,6 +9,7 @@ import { Breadcrumb, Layout, Menu } from 'antd'
 import React, { useState } from 'react'
 import './style/style.less'
 
+
 const { Header, Content, Footer, Sider } = Layout
 function getItem (label, key, icon, children) {
   return {
@@ -29,7 +30,6 @@ const items = [
   getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
   getItem('Files', '9', <FileOutlined />),
 ]
-
 const LayOut = () => {
   const [collapsed, setCollapsed] = useState(false)
   return (
@@ -38,15 +38,7 @@ const LayOut = () => {
         minHeight: '100vh',
       }}
     >
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={broken => {
-          console.log(broken)
-        }}
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}>
+      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
@@ -91,5 +83,4 @@ const LayOut = () => {
     </Layout>
   )
 }
-
 export default LayOut
