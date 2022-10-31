@@ -1,6 +1,7 @@
 # Mobx
 ## 1. Mobx介绍
 > 一个可以和React良好配合的集中状态管理工具，和Redux解决的问题相似，都可以独立组件进行集中状态管理
+
 ![image](https://user-images.githubusercontent.com/54365306/199037896-c1d906af-65f5-492f-8876-361a7044d106.png)
 
 
