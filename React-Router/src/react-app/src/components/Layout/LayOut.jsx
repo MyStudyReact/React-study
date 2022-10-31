@@ -1,12 +1,11 @@
 import {
   DesktopOutlined,
-  FileOutlined,
   PieChartOutlined,
-  TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
 import { Breadcrumb, Layout, Menu } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import './style/style.less'
 
 
@@ -19,19 +18,34 @@ function getItem (label, key, icon, children) {
     label,
   }
 }
-const items = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
-]
+
+
 const LayOut = () => {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
   const [collapsed, setCollapsed] = useState(false)
+  const [items, setItems] = useState([])
+  const [curLabel, setCurLabel] = useState('')
+
+  useEffect(() => {
+    const items = [
+      getItem('数据概览', '/', <PieChartOutlined />),
+      getItem('内容管理', '/contentManage', <DesktopOutlined />),
+      getItem('发布文章', '/publishedArticles', <UserOutlined />),
+    ]
+    setItems(items)
+
+    setCurLabel(items[0].label)
+  }, [])
+  const onClick = (e) => {
+    navigate(e.key)
+    items.forEach(item => {
+      if (item.key === e.key) {
+        setCurLabel(item.label)
+      }
+    })
+  }
   return (
     <Layout
       style={{
@@ -40,7 +54,8 @@ const LayOut = () => {
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        {/* // >=4.20.0 可用，推荐的写法 */}
+        <Menu theme="dark" defaultSelectedKeys={pathname} selectedKeys={pathname} mode="inline" items={items} onClick={onClick} />
       </Sider>
       <Layout className="site-layout">
         <Header
@@ -59,8 +74,8 @@ const LayOut = () => {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <Breadcrumb.Item>首页</Breadcrumb.Item>
+            <Breadcrumb.Item>{curLabel}</Breadcrumb.Item>
           </Breadcrumb>
           <div
             className="site-layout-background"
@@ -69,9 +84,10 @@ const LayOut = () => {
               minHeight: 360,
             }}
           >
-            Bill is a cat.
+            <Outlet />
           </div>
         </Content>
+
         <Footer
           style={{
             textAlign: 'center',
