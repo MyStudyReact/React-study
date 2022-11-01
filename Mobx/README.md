@@ -229,3 +229,14 @@ function App() {
 // 包裹组件让视图响应数据变化
 export default observer(App)
 ```
+
+## 7.基础总结
+### 1.初始化mobx的过程是怎样的
+> 声明数据 -> 响应式处理 -> 定义action函数 -> 实例化导出
+### 2.mobx如何配合react，需要依赖什么包？
+> mobx-react-lite 作为链接包（中间包），导出observer方法，包裹组件（只能和函数组件配合）
+> 类组件是 mobx-react包
+### 3.模块化解决了什么问题？
+> 维护性问题
+### 4.如何实现mobx的模块化
+> 按照功能拆分store模块，根模块中组合子模块，利用context机制依赖注入

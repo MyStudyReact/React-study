@@ -26,6 +26,10 @@ const rootStore = new RootStore()
 
 /**
  * 使用react context机制 完成统一方法封装
+ * 
+ * 核心目的：让每个业务组件可以通过统一一样的方法获取store中的数据
+ * 方便调试时一个额外的补充 的功能
+ * 
  * Provider value={传递的数据}
  * 查找机制：useContext 优先从Provider的value上找，
  * 如果找不到，就会找createContext方法传递过来的默认参数
