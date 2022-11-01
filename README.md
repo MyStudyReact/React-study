@@ -1651,6 +1651,63 @@ function App() {
 export default observer(App)
 ```
 
+## 7. 多组件共享数据
+> 目标：当数据发生变化 所有用到数据的组件都会得到同步的组件的更新
+> 实现步骤：在Foo组件和Bar组件中分别使用store中的数据，然后在app组件中进行数据修改，查看Foo组件和Bar组件是否得到更新
+
+![无标题-2022-08-09-1117.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1660015239265-7868127a-b588-4083-b61f-08c9cac18009.png#clientId=u91805b20-013b-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uba8a72dc&margin=%5Bobject%20Object%5D&name=%E6%97%A0%E6%A0%87%E9%A2%98-2022-08-09-1117.png&originHeight=902&originWidth=1559&originalType=binary&ratio=1&rotation=0&showTitle=false&size=269704&status=done&style=none&taskId=u947caff5-d020-49a3-9a43-09309f5631d&title=)
+```jsx
+// 用taskStore中的taskList数据
+import { useStore } from './store'
+import { observer } from 'mobx-react-lite'
+const Bar = () => {
+  const { taskStore } = useStore()
+  return (
+    <ul>
+      {taskStore.taskList.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  )
+}
+
+export default observer(Son)
+```
+```jsx
+// 用taskStore中的taskList数据
+import { useStore } from './store'
+import { observer } from 'mobx-react-lite'
+const Bar = () => {
+  const { taskStore } = useStore()
+  return (
+    <ul>
+      {taskStore.taskList.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  )
+}
+
+export default observer(Son)
+```
+```jsx
+import Bar from './Bar'
+import Foo from './Foo'
+import { useStore } from './store'
+function App() {
+  const { taskStore } = useStore()
+  return (
+    <div className="App">
+      <Bar />
+      <button onClick={() => taskStore.setTaskList('angular')}>
+        修改taskStore
+      </button>
+    </div>
+  )
+}
+export default App
+```
+
 ## 8.基础总结
 ### 1.初始化mobx的过程是怎样的
 > 声明数据 -> 响应式处理 -> 定义action函数 -> 实例化导出
