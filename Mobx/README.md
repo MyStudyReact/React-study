@@ -70,3 +70,58 @@ function App() {
 // 包裹组件让视图响应数据变化
 export default observer(App)
 ```
+
+## 3. 计算属性（衍生状态）
+> 概念: 有一些状态根据现有的状态计算（衍生）得到，我们把这种状态叫做计算属性, 看下面的例子
+
+![b.png](https://cdn.nlark.com/yuque/0/2022/png/274425/1659258189676-fa84e558-c8b5-4e3e-9d7b-ef87a020af66.png#clientId=u9cdd7397-35da-4&crop=0&crop=0&crop=1&crop=1&from=drop&height=577&id=u9e116896&margin=%5Bobject%20Object%5D&name=b.png&originHeight=770&originWidth=923&originalType=binary&ratio=1&rotation=0&showTitle=false&size=591988&status=done&style=none&taskId=u7bf6a8a4-c07b-41a0-aaf1-aeeb12c9bc5&title=&width=692)
+
+实现步骤
+
+1. 生命一个存在的数据
+2. 通过get关键词 定义计算属性
+3. 在 makeAutoObservable 方法中标记计算属性
+
+```javascript
+import { computed, makeAutoObservable } from 'mobx'
+
+class CounterStore {
+  list = [1, 2, 3, 4, 5, 6]
+  constructor() {
+    makeAutoObservable(this, {
+      filterList: computed
+    })
+  }
+  // 修改原数组
+  changeList = () => {
+    this.list.push(7, 8, 9)
+  }
+  // 定义计算属性
+  get filterList () {
+    return this.list.filter(item => item > 4)
+  }
+}
+
+const counter = new CounterStore()
+
+export default counter
+```
+```jsx
+// 导入counterStore
+import counterStore from './store'
+// 导入observer方法
+import { observer } from 'mobx-react-lite'
+function App() {
+  return (
+    <div className="App">
+      {/* 原数组 */}
+      {JSON.stringify(counterStore.list)}
+      {/* 计算属性 */}
+      {JSON.stringify(counterStore.filterList)}
+      <button onClick={() => counterStore.changeList()}>change list</button>
+    </div>
+  )
+}
+// 包裹组件让视图响应数据变化
+export default observer(App)
+```
