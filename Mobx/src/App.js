@@ -1,5 +1,5 @@
 // 1.导入countStore
-import { counterStore } from './store/counter'
+import { counterStore } from './store/counter.Store'
 
 // 4.导入中间件连接mobx react 完成响应式变化
 import { observer } from 'mobx-react-lite'
