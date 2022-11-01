@@ -1,16 +1,17 @@
 # Mobx
-## 1. Mobx介绍
-> 一个可以和React良好配合的集中状态管理工具，和Redux解决的问题相似，都可以独立组件进行集中状态管理
+## 1. 配置开发环境
+> Mobx是一个独立的响应式的库，可以独立于任何UI框架存在，但是通常大家习惯把它和React进行绑定使用，用Mobx来做响应式数据建模，React作为UI视图框架渲染内容，我们环境的配置需要三个部分
+一个create-react-app创建好的React项目环境
+mobx框架本身
+一个用来链接mobx和React的中间件
+```Bash
+# 创建项目
+# npx 创建方式
+$ npx create-react-app react-mobx 
 
-![image](https://user-images.githubusercontent.com/54365306/199037896-c1d906af-65f5-492f-8876-361a7044d106.png)
+# vite 创建方式
+$ npm create vite react-mobx --template react
 
-
-## 优势
-1. 简单
-> 编写无模板的极简代码精准描述你的意图 
-2. 轻松实现最优渲染
-> 依赖自动追踪，实现最小渲染优化
-3. 架构自由
-> 可移植, 可测试 无特殊心智负担
-## 社区评价
-![image](https://user-images.githubusercontent.com/54365306/199037835-c2c90f7f-8ac0-40b3-8735-0a540c2bfc97.png)
+# 安装mobx和中间件工具 mobx-react-lite  只能函数组件中使用
+$ npm i  mobx  mobx-react-lite
+```
