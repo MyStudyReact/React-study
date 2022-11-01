@@ -1498,6 +1498,55 @@ function App() {
 export default observer(App)
 ```
 
+## 5. 异步数据处理
+> 测试接口: [http://geek.itheima.net/v1_0/channels](http://geek.itheima.net/v1_0/channels')
+> 实现步骤:
+> 1. 在mobx中编写异步请求方法 获取数据 存入state中
+> 2. 组件中通过 useEffect + 空依赖  触发action函数的执行 
+
+```javascript
+// 异步的获取
+
+import { makeAutoObservable } from 'mobx'
+import axios from 'axios'
+
+class ChannelStore {
+  channelList = []
+  constructor() {
+    makeAutoObservable(this)
+  }
+  // 只要调用这个方法 就可以从后端拿到数据并且存入channelList
+  setChannelList = async () => {
+    const res = await axios.get('http://geek.itheima.net/v1_0/channels')
+    this.channelList = res.data.data.channels
+  }
+}
+const channlStore = new ChannelStore()
+export default channlStore
+```
+```jsx
+import { useEffect } from 'react'
+import { useStore } from './store'
+import { observer } from 'mobx-react-lite'
+function App() {
+  const { channlStore } = useStore()
+  // 1. 使用数据渲染组件
+  // 2. 触发action函数发送异步请求
+  useEffect(() => {
+    channlStore.setChannelList()
+  }, [])
+  return (
+    <ul>
+      {channlStore.channelList.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  )
+}
+// 让组件可以响应数据的变化[也就是数据一变组件重新渲染]
+export default observer(App)
+```
+
 ## 6. 模块化
 > 场景: 一个项目有很多的业务模块，我们不能把所有的代码都写到一起，这样不好维护，提了提供可维护性，需要引入模块化机制
 
