@@ -1581,3 +1581,23 @@ const useStore = () => React.useContext(context)
 
 export { useStore }
 ```
+
+### 4. 组件使用模块中的数据
+```jsx
+import { observer } from 'mobx-react-lite'
+// 导入方法
+import { useStore } from './store'
+function App() {
+  // 得到store
+  const store = useStore()
+  return (
+    <div className="App">
+      <button onClick={() => store.counterStore.addCount()}>
+        {store.counterStore.count}
+      </button>
+    </div>
+  )
+}
+// 包裹组件让视图响应数据变化
+export default observer(App)
+```
