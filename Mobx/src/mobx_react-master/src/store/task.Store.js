@@ -24,7 +24,7 @@ class TaskStore {
   }
 
   // 完成的数量
-  get isFinishedLength () {
+  get isFinished () {
     return this.list.filter(item => item.isDone).length
   }
 

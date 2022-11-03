@@ -19,12 +19,12 @@ function Task () {
    * mobx Store去维护状态
    * input 只需要把 e.target.checked 交给store 让他来处理进行修改
    */
-  function onChange (e, id) {
+  function singleCheck (e, id) {
     taskStore.singleCheck(id, e.target.checked)
   }
 
   //全选
-  function allChange (e) {
+  function allCheck (e) {
     taskStore.allCheck(e.target.checked)
   }
 
@@ -53,56 +53,56 @@ function Task () {
   }
 
   return (
-    <section>
-      <section className="todoapp">
-        <header className="header">
-          <h1>todos</h1>
-          <input
-            className="new-todo"
-            autoFocus
-            autoComplete="off"
-            placeholder="What needs to be done?"
-            value={taskValue}
-            onChange={(e) => setTaskValue(e.target.value)}
-            onKeyUp={addTask}
-          />
-        </header>
-        <section className="main">
-          {/* 全选 */}
-          <input
-            id="toggle-all"
-            className="toggle-all"
-            type="checkbox"
-            checked={taskStore.isAll}
-            onChange={allChange}
-          />
-          <label htmlFor="toggle-all"></label>
-          <ul className="todo-list">
-            {/* completed 类名标识 */}
-            {taskStore.list.map(item => (
+    <section className="todoapp">
+      <header className="header">
+        <h1>todos</h1>
+        <input
+          className="new-todo"
+          autoFocus
+          autoComplete="off"
+          placeholder="What needs to be done?"
+          value={taskValue}
+          onChange={(e) => setTaskValue(e.target.value)}
+          onKeyUp={addTask}
+        />
+      </header>
+      <section className="main">
+        {/* 全选 */}
+        <input
+          id="toggle-all"
+          className="toggle-all"
+          type="checkbox"
+          onChange={allCheck}
+          checked={taskStore.isAll}
+        />
+        <label htmlFor="toggle-all"></label>
+        <ul className="todo-list">
+          {/* completed 类名标识 */}
+          {
+            taskStore.list.map(task => (
               <li
-                key={item.id}
-                className={`todo${item.isDone ? ' completed' : ''}`}
+                key={task.id}
+                className={`todo${task.isDone ? ' completed' : ''}`}
               >
                 <div className="view">
                   {/* 单选框 受控和非受控 受控的方式去处理 */}
                   <input
                     className="toggle"
                     type="checkbox"
-                    checked={item.isDone}
-                    onChange={(e) => onChange(e, item.id)} />
-                  <label >{item.name}</label>
+                    checked={task.isDone}
+                    onChange={(e) => singleCheck(e, task.id)} />
+                  <label > {task.name} </label>
                   {/* 删除按钮 */}
-                  <button className="destroy" onClick={() => delTask(item.id)}></button>
+                  <button className="destroy" onClick={() => delTask(task.id)}></button>
                 </div>
               </li>
-            ))}
-          </ul>
-        </section>
+            ))
+          }
+        </ul>
       </section>
-      <footer className='footer'>
-        <span className='todo-count'>
-          任务总数：{taskStore.list.length} 已完成：{taskStore.isFinishedLength}
+      <footer className="footer">
+        <span className="todo-count">
+          任务总数: {taskStore.list.length} 已完成: {taskStore.isFinished}
         </span>
       </footer>
     </section>
