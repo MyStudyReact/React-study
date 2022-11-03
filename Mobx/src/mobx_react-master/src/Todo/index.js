@@ -26,6 +26,11 @@ function Task () {
     taskStore.allCheck(e.target.checked)
   }
 
+  // 删除
+  const delTask = (id) => {
+    taskStore.delTask(id)
+  }
+
   return (
     <section className="todoapp">
       <header className="header">
@@ -62,7 +67,8 @@ function Task () {
                   checked={item.isDone}
                   onChange={(e) => onChange(e, item.id)} />
                 <label >{item.name}</label>
-                <button className="destroy"></button>
+                {/* 删除按钮 */}
+                <button className="destroy" onClick={() => delTask(item.id)}></button>
               </div>
             </li>
           ))}
