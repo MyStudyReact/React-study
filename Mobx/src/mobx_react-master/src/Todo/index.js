@@ -1,9 +1,25 @@
+// import { useState } from 'react'
+
 import './index.css'
 import { useStore } from '../store'
+import { observer } from 'mobx-react-lite'
 
 function Task () {
   //useStore
   const { taskStore } = useStore()
+
+  //单选受控方式
+  // const {check,setCheck} = useState()
+  /**
+   * 以上方式不能进行处理，因为是针对于每个数组元素而言的
+   * 
+   * 所以思路如下：
+   * mobx Store去维护状态
+   * input 只需要把 e.target.checked 交给store 让他来处理进行修改
+   */
+  function onChange (e, id) {
+    taskStore.singleCheck(id, e.target.checked)
+  }
 
   return (
     <section className="todoapp">
@@ -31,7 +47,12 @@ function Task () {
               className={`todo${item.isDone ? ' completed' : ''}`}
             >
               <div className="view">
-                <input className="toggle" type="checkbox" />
+                {/* 单选框 受控和非受控 受控的方式去处理 */}
+                <input
+                  className="toggle"
+                  type="checkbox"
+                  checked={taskStore.isDone}
+                  onChange={(e) => onChange(e, item.id)} />
                 <label >{item.name}</label>
                 <button className="destroy"></button>
               </div>
@@ -43,4 +64,4 @@ function Task () {
   )
 }
 
-export default Task
+export default observer(Task)
