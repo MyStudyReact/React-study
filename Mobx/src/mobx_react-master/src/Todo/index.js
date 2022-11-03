@@ -1,15 +1,17 @@
-// import { useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useState } from 'react'
+// import { v4 as uuid } from 'uuid'
+import uuid from "react-uuid"
 
 import './index.css'
 import { useStore } from '../store'
-import { observer } from 'mobx-react-lite'
 
 function Task () {
   //useStore
   const { taskStore } = useStore()
 
   //单选受控方式
-  // const {check,setCheck} = useState()
+  // const [check,setCheck] = useState()
   /**
    * 以上方式不能进行处理，因为是针对于每个数组元素而言的
    * 
@@ -31,6 +33,26 @@ function Task () {
     taskStore.delTask(id)
   }
 
+  const [taskValue, setTaskValue] = useState('')
+  // 新增
+  function addTask (e) {
+    console.log(e, '==e')
+    // e.keyCode 后面已经被废弃，使用 e.code == 'Enter
+    if (e.code === 'Enter') {
+      // if (e.keyCode === 13) {
+
+      const obj = {
+        id: uuid(),
+        name: taskValue,
+        isDone: false,
+      }
+      taskStore.addTask(obj)
+
+      // 清空
+      setTaskValue('')
+    }
+  }
+
   return (
     <section className="todoapp">
       <header className="header">
@@ -40,6 +62,9 @@ function Task () {
           autoFocus
           autoComplete="off"
           placeholder="What needs to be done?"
+          value={taskValue}
+          onChange={(e) => setTaskValue(e.target.value)}
+          onKeyUp={addTask}
         />
       </header>
       <section className="main">

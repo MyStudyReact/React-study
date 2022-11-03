@@ -40,5 +40,10 @@ class TaskStore {
   delTask = (id) => {
     this.list = this.list.filter(item => item.id !== id)
   }
+
+  // 新增
+  addTask = (task) => {
+    this.list.push(task)
+  }
 }
 export default TaskStore
