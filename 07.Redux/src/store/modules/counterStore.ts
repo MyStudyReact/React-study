@@ -9,6 +9,7 @@ import { CounterState } from '../../types/root.d'
 
 const initialState: CounterState = {
   count: 1,
+  taskList: ['react']
 }
 
 const counter = createSlice({
@@ -21,13 +22,17 @@ const counter = createSlice({
     add(state) {
       state.count++
     },
+    // action为一个对象 对象中有一个固定的属性叫做payload 为传递过来的参数
+    addTaskList(state, action) {
+      state.taskList.push(action.payload)
+    }
   }
 })
 
-const { add } = counter.actions
+const { add, addTaskList } = counter.actions
 const reducer = counter.reducer
 
 // 导出修改数据的函数
-export { add }
+export { add, addTaskList }
 // 导出reducer
 export default reducer

@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import './App.css'
-import { CounterState } from './types/root.d'
-import { add } from './store/modules/counterStore'
+import { RootState } from './store'
+import { add, addTaskList } from './store/modules/counterStore'
 
 function App() {
   // 使用数据
-  const { count } = useSelector(state => state.counterStore)
+  const { count, taskList } = useSelector((state: RootState) => state.counterStore)
 
   // 修改数据
   const dispatch = useDispatch()
@@ -19,6 +19,12 @@ function App() {
     <div className="App">
       {count}
       <button onClick={clickHandler}>+</button>
+
+      <hr />
+      {taskList.map((item: string) => {
+        return <div>{item}</div>
+      })}
+      <button onClick={() => dispatch(addTaskList('vue'))}>addList</button>
     </div>
   )
 }
