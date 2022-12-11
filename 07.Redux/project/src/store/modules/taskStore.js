@@ -20,11 +20,16 @@ const taskStore = createSlice({
     // 删除方法
     delTask (state, action) {
       state.list = state.list.filter(task => task.id !== action.payload)
+    },
+    // 单选状态
+    singleCheck (state, action) {
+      const item = state.list.find(task => task.id === action.payload)
+      item.done = !item.done
     }
   }
 })
 
-const { delTask } = taskStore.actions
-export { delTask }
+const { delTask, singleCheck } = taskStore.actions
+export { delTask, singleCheck }
 
 export default taskStore.reducer

@@ -1,7 +1,7 @@
 
 import './app.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { delTask } from './store/modules/taskStore'
+import { delTask, singleCheck } from './store/modules/taskStore'
 
 function App () {
   const { list } = useSelector(state => state.taskStore)
@@ -28,7 +28,7 @@ function App () {
                   className="toggle"
                   type="checkbox"
                   checked={task.done}
-                  onChange={(e) => singleCheck(task.id, e)} />
+                  onChange={() => dispatch(singleCheck(task.id))} />
                 <label>{task.title}</label>
                 <button
                   className="destroy"
