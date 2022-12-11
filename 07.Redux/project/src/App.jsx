@@ -1,11 +1,28 @@
 
 import './app.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { delTask, singleCheck, allCheck } from './store/modules/taskStore'
+import { delTask, singleCheck, allCheck, addTask } from './store/modules/taskStore'
+import { useState } from 'react'
 
 function App () {
   const { list } = useSelector(state => state.taskStore)
   const dispatch = useDispatch()
+
+  const [keywords, setKeywords] = useState('')
+  const onChange = (e) => {
+    setKeywords(e.target.value)
+  }
+  const onKeyUp = (e) => {
+    if (e.keyCode === 13) {
+      const task = {
+        id: 3,
+        title: keywords,
+        done: false,
+      }
+      dispatch(addTask(task))
+    }
+  }
+
   return (
     <section className="todoapp">
       <header className="header">
@@ -15,6 +32,9 @@ function App () {
           autoFocus
           autoComplete="off"
           placeholder="What needs to be done?"
+          value={keywords}
+          onChange={onChange}
+          onKeyUp={onKeyUp}
         />
       </header>
       <section className="main">
