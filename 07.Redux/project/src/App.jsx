@@ -1,9 +1,11 @@
 
 import './app.css'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { delTask } from './store/modules/taskStore'
 
 function App () {
   const { list } = useSelector(state => state.taskStore)
+  const dispatch = useDispatch()
   return (
     <section className="todoapp">
       <header className="header">
@@ -30,7 +32,7 @@ function App () {
                 <label>{task.title}</label>
                 <button
                   className="destroy"
-                  onClick={() => delTask(task.id)}></button>
+                  onClick={() => dispatch(delTask(task.id))}></button>
               </div>
             </li>
           ))}

@@ -17,8 +17,14 @@ const taskStore = createSlice({
     ]
   },
   reducers: {
-
+    // 删除方法
+    delTask (state, action) {
+      state.list = state.list.filter(task => task.id !== action.payload)
+    }
   }
 })
+
+const { delTask } = taskStore.actions
+export { delTask }
 
 export default taskStore.reducer
