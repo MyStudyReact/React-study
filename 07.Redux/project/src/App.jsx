@@ -1,7 +1,7 @@
 
 import './app.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { delTask, singleCheck } from './store/modules/taskStore'
+import { delTask, singleCheck, allCheck } from './store/modules/taskStore'
 
 function App () {
   const { list } = useSelector(state => state.taskStore)
@@ -18,7 +18,12 @@ function App () {
         />
       </header>
       <section className="main">
-        <input id="toggle-all" className="toggle-all" type="checkbox" />
+        <input
+          id="toggle-all"
+          className="toggle-all"
+          type="checkbox"
+          checked={list.every((task) => task.done)}
+          onChange={(e) => dispatch(allCheck(e.target.checked))} />
         <label htmlFor="toggle-all"></label>
         <ul className="todo-list">
           {list.map((task) => (

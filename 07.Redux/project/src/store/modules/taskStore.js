@@ -25,11 +25,15 @@ const taskStore = createSlice({
     singleCheck (state, action) {
       const item = state.list.find(task => task.id === action.payload)
       item.done = !item.done
-    }
+    },
+    // 全选状态
+    allCheck (state, action) {
+      state.list.forEach(task => task.done = action.payload)
+    },
   }
 })
 
-const { delTask, singleCheck } = taskStore.actions
-export { delTask, singleCheck }
+const { delTask, singleCheck, allCheck } = taskStore.actions
+export { delTask, singleCheck, allCheck }
 
 export default taskStore.reducer
