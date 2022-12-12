@@ -15,6 +15,26 @@
 // console.log({ num, notANumber, infinity, hex, brinary, octal });
 
 /* 布尔类型 */
-let b1: boolean = false
-let b2: boolean = Boolean(1)
-console.log({ b1, b2 });
+// let b1: boolean = false
+// let b2: boolean = Boolean(1)
+// console.log({ b1, b2 });
+
+/* 函数类型 */
+/**
+ * void 表示不能有返回值
+ * number 就是返回数字
+ */
+// function fnVoid(): void {
+//   console.log(123);
+// }
+// fnVoid()
+
+/*空值类型 */
+// let u: void = undefined
+// let n: void = null
+// console.log({ u, n });
+
+/*undefined null */
+// const u: undefined = undefined
+// const n: null = null
+// console.log({ u, n });

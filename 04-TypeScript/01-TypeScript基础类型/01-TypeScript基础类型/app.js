@@ -12,6 +12,23 @@
 // let octal: number = 0o744        // 八进制
 // console.log({ num, notANumber, infinity, hex, brinary, octal });
 /* 布尔类型 */
-var b1 = false;
-var b2 = Boolean(1);
-console.log({ b1: b1, b2: b2 });
+// let b1: boolean = false
+// let b2: boolean = Boolean(1)
+// console.log({ b1, b2 });
+/*空值类型 */
+// let u: void = undefined
+// let n: void = null
+// console.log({ u, n });
+/* 函数类型 */
+/**
+ * void 表示不能有返回值
+ * number 就是返回数字
+ */
+// function fnVoid(): void {
+//   console.log(123);
+// }
+// fnVoid()
+/*undefined null */
+var u = undefined;
+var n = null;
+console.log({ u: u, n: n });
