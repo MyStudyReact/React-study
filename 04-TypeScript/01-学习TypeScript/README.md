@@ -119,3 +119,47 @@ let arr:number[] = arguments
 //ts内置对象IArguments 定义
 let arr:IArguments = arguments
 ```
+
+
+## 函数扩展
+### 函数基本类型
+> 注意，参数不能多传，也不能少传 必须按照约定的类型来
+### 函数的可选参数(用?)
+### 函数参数的默认值
+> 跟js一样直接等号赋值
+### 接口定义函数
+```ts
+//定义参数 num 和 num2  ：后面定义返回值的类型
+interface Add {
+    (num:  number, num2: number): number
+}
+ 
+const fn: Add = (num: number, num2: number): number => {
+    return num + num2
+}
+fn(5, 5)
+ 
+ 
+interface User{
+    name: string;
+    age: number;
+}
+function getUserInfo(user: User): User {
+  return user
+}
+```
+
+**注意**
+> 如果可选参数没穿 就为 undefined
+
+### 定义剩余参数
+```ts
+const fn = (array:number[],...items:any[]):any[] => {
+  console.log(array,items)
+  return items
+}
+ 
+let a:number[] = [1,2,3]
+ 
+fn(a,'4','5','6')
+```
