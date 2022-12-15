@@ -1,4 +1,4 @@
-# 学习TypeScript
+# 01-学习TypeScript
 ## 安装起步
 ### 全局安装
 ```sh
@@ -48,3 +48,13 @@ tsc --init
   }
 }
 ```
+
+## 任意类型
+> 用tsc 一直重复编译很麻烦，所以更换成 nodejs 环境执行ts
+> 
+> 安装 
+> npm i @types/node --save-dev （node环境支持的依赖必装）
+> npm i ts-node --g
+>
+> 运行
+> ts-node app.ts
