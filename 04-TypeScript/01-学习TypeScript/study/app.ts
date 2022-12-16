@@ -32,5 +32,6 @@ class B extends A {
 }
 
 let b = new B()
+// 父类的所有都可以用（除了私有的）
 b.setName('不好')
 console.log(b.getName());
