@@ -404,3 +404,181 @@ promise().then(res=>{
 
 而他们的定义文件，则在 
  [TypeScript核心库的定义文件](https://github.com/Microsoft/TypeScript/tree/master/src/lib) 核心库的定义文件中
+
+## Class类
+> ES6提供了更接近传统语言的写法，引入了Class（类）这个概念，作为对象的模板。通过class关键字，可以定义类。基本上，ES6的class
+> 以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法
+> 已。上面的代码用ES6的“类”改写，就是下面这样。
+
+### 定义类
+```ts
+class Person {
+  // ts里面还需要再定义一遍
+  name: string
+  // 如果了定义了变量不用 也会报错 通常是给个默认值 或者 进行赋值
+  age: number = 0
+  sub: boolean
+  constructor(name: string, age: number, sub: boolean) {
+    this.name = name;
+    this.age = age;
+    this.sub = sub;
+  }
+```
+### 类的修饰符
+> 使用public 修饰符 可以让你定义的变量 内部访问 也可以外部访问 如果不写默认就是public
+> 使用private 修饰符 代表定义的变量私有的只能在内部访问 不能在外部访问
+> 使用protected 修饰符 代表定义的变量私有的只能在内部和继承的子类中访问 不能在外部访问
+```ts
+/**
+ * 类的修饰符 public private protected (默认public)
+ * public     公用类 外部可直接访问 （var）
+ * private    私有类 只能内部进行访问 （let）
+ * protected  受保护类 只能内部和子类中访问
+ */
+class Person {
+  // ts里面还需要再定义一遍
+  public name: string
+  // 如果了定义了变量不用 也会报错 通常是给个默认值 或者 进行赋值
+  private age: number = 0
+  protected sub: boolean
+  ...
+}
+
+class Man extends Person {
+  constructor() {
+    super('阴', 22, false)
+    this.sub // 子类可以访问到
+  }
+  create() {
+    console.log(this.sub)
+  }
+}
+
+let p = new Person('阴', 22, false)
+// p.age //属性“age”为私有属性，只能在类“Person”中访问。
+// p.sub //属性“sub”受保护，只能在类“Person”及其子类中访问。
+```
+
+### 静态属性和静态方法
+> 我们用static 定义的属性/方法 不可以通过this 去访问 只能通过类名去调用
+> 如果两个函数都是static 静态的是可以通过this互相调用
+```ts
+class Person {
+  static aaa: symbol = Symbol('aaa')
+  constructor(name: string, age: number, sub: boolean) {
+    ...
+
+    this.aaa   //属性“aaa”在类型“Person”上不存在。
+    Person.aaa // 这样是可以的
+
+    this.run()   // 这里面掉不了 run函数
+    Person.run() //这样是可以的
+  }
+
+  // 静态函数
+  static run() {
+    // 再静态函数中 this 只能访问到 static 属性
+    // this.aaa
+    this.dev()
+    console.log(this.aaa, this.name, '5555');
+    return 'bbb'
+  }
+
+  static dev() {
+    this.aaa
+    // 两个静态函数是可以互相调用的
+    this.run()
+    return 'dev'
+  }
+}
+
+// static 不需要进行new 可以通过类名进行调用
+console.log(Person.aaa, Person.run());
+```
+
+### interface 定义类
+> 使用关键字 implements   后面跟interface的名字多个用逗号隔开 继承还是用extends
+
+
+```ts
+interface PersonClass {
+    get(type: boolean): boolean
+}
+ 
+interface PersonClass2{
+    set():void,
+    asd:string
+}
+ 
+class A {
+    name: string
+    constructor() {
+        this.name = "123"
+    }
+}
+ 
+class Person extends A implements PersonClass,PersonClass2 {
+    asd: string
+    constructor() {
+        super()
+        this.asd = '123'
+    }
+    get(type:boolean) {
+        return type
+    }
+    set () {
+ 
+    }
+}
+```
+
+### 抽象类
+> 应用场景如果你写的类实例化之后毫无用处此时我可以把他定义为抽象类
+> 或者你也可以把他作为一个基类-> 通过继承一个派生类去实现基类的一些方法
+> 抽象方法就是只有方法的定义，没有方法体，方法体需要在子类中进行实现。
+> **抽象类就是将众多类中具有共同部分的功能抽离出来，单独创建一个类作为其他派生类的基类使用。他们不允许被实例化，定义抽象类使用abstract关键字**
+> 我们看例子
+> 下面这段代码会报错抽象类无法被实例化
+
+```ts
+abstract class A {
+   public name:string
+   
+}
+ 
+new A()
+```
+
+> 例子2
+> 我们在A类定义了 getName 抽象方法但为实现
+> 我们B类实现了A定义的抽象方法 如不实现就不报错 我们定义的抽象方法必须在派生类实现
+
+```ts
+abstract class A {
+   name: string
+   constructor(name: string) {
+      this.name = name;
+   }
+   print(): string {
+      return this.name
+   }
+ 
+   abstract getName(): string
+}
+ 
+class B extends A {
+   constructor() {
+      super('小满')
+   }
+   getName(): string {
+      return this.name
+   }
+}
+ 
+let b = new B();
+ 
+console.log(b.getName());
+```
+**Tips:** 
+**派生类：子类;基类：父类** 
+**实例化是指在面向对象的编程中，把用类创建对象的过程称为实例化。是将一个抽象的概念类，具体到该类实物的过程。实例化过程中一般由类名 对象名 = new 类名（参数1，参数2...参数n）构成。** 
