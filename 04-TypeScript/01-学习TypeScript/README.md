@@ -163,3 +163,77 @@ let a:number[] = [1,2,3]
  
 fn(a,'4','5','6')
 ```
+
+## 联合类型 | 交叉类型 | 类型断言
+### 联合类型
+> 用“|”
+
+### 交叉类型 （还可以extends）
+> 用“&”
+
+### 类型断言
+> (值 as 类型)　　或　　(<类型>值)  (value as string) 或者 (<string>value)
+
+```ts
+interface A {
+  run: string
+}
+
+interface B {
+  build: string
+}
+
+let fn1 = (type: A | B): void => {
+  // console.log(type.run); //类型“A | B”上不存在属性“run”。类型“B”上不存在属性“run”。
+
+  // 以下两种都可以
+  console.log((<A>type).run);
+
+  console.log((type as A).run);
+}
+
+fn1({
+  build: '123'
+}) // undefined 滥用断言导致的
+
+```
+**需要注意的是，类型断言只能够「欺骗」TypeScript 编译器，无法避免运行时的错误，反而滥用类型断言可能会导致运行时错误：**
+#### 使用any临时断言
+
+```ts
+(window as any).abc = 123
+//可以使用any临时断言在 any 类型的变量上，访问任何属性都是允许的。
+```
+### as const
+> 是对字面值的断言，与const直接定义常量是有区别的
+> 如果是普通类型跟直接const 声明是一样的
+
+```ts
+const names = '小满'
+names = 'aa' //无法修改
+ 
+ 
+let names2 = '小满' as const
+names2 = 'aa' //无法修改
+```
+
+```ts
+// 数组
+let a1 = [10, 20] as const;
+const a2 = [10, 20];
+ 
+a1.unshift(30); // 错误，此时已经断言字面量为[10, 20],数据无法做任何修改
+a2.unshift(30); // 通过，没有修改指针
+```
+
+### 类型断言是不具影响力的
+```ts
+
+function toBoolean(something: any): boolean {
+    return something as boolean;
+}
+ 
+toBoolean(1);
+// 返回值为 1
+//
+```
