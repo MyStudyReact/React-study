@@ -582,3 +582,44 @@ console.log(b.getName());
 **Tips:** 
 **派生类：子类;基类：父类** 
 **实例化是指在面向对象的编程中，把用类创建对象的过程称为实例化。是将一个抽象的概念类，具体到该类实物的过程。实例化过程中一般由类名 对象名 = new 类名（参数1，参数2...参数n）构成。** 
+
+## 元组
+> 如果需要一个固定大小的不同类型值的集合，我们需要使用元组。 
+**元组就是数组的变种**
+> 元组（Tuple）是固定数量的不同类型的元素的组合。
+> 元组与集合的不同之处在于，元组中的元素类型可以是不同的，而且数量固定。元组的好处在于可以把多个元素作为一个单元传递。如果一个方法需要返回多个值，可以把这多个值作
+> 元组返回，而不需要创建额外的类来表示。
+```ts
+let arr:[number,string] = [1,'string']
+ 
+ 
+let arr2: readonly [number,boolean,string,undefined] = [1,true,'sring',undefined]
+```
+
+当赋值或访问一个已知索引的元素时，会得到正确的类型：
+```ts
+let arr:[number,string] = [1,'string']
+arr[0].length //error
+arr[1].length //success
+ 
+//数字是没有length 的
+```
+
+### 越界元素
+```ts
+let arr:[number,string] = [1,'string']
+ 
+arr.push(true)//error
+```
+
+**应用场景**
+**例如定义execl返回的数据**
+```ts
+let excel: [string, string, number, string][] = [
+    ['title', 'name', 1, '123'],
+    ['title', 'name', 1, '123'],
+    ['title', 'name', 1, '123'],
+    ['title', 'name', 1, '123'],
+    ['title', 'name', 1, '123'],
+]
+```
