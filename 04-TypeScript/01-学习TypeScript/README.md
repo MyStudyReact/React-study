@@ -623,3 +623,37 @@ let excel: [string, string, number, string][] = [
     ['title', 'name', 1, '123'],
 ]
 ```
+
+## 类型推论|类型别名
+### 类型推论
+> 1. TypeScript 会在没有明确的指定类型的时候推测出一个类型，这就是类型推论
+>    不能够在赋值给别的类型
+> 2. 如果你声明变量没有定义类型也没有赋值这时候TS会推断成any类型可以进行任何操作
+
+### 类型别名
+> type 关键字（可以给一个类型定义一个名字）多用于符合类型
+#### 1. 定义类型别名
+```ts
+type str = string
+let s:str = "我是小满"
+console.log(s);
+```
+#### 2. 定义函数别名
+```ts
+type str = () => string
+let s: str = () => "我是小满"
+console.log(s);
+```
+### 3.定义联合类型别名
+```ts
+type str = string | number
+let s: str = 123
+let s2: str = '123'
+console.log(s,s2);
+```
+### 4.定义值的别名
+```ts
+type value = boolean | 0 | '213'
+let s:value = true
+//变量s的值  只能是上面value定义的值
+```
