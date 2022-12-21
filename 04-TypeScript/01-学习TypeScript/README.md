@@ -1078,3 +1078,39 @@ function getLegnth<T extends Len>(arg:T) {
 getLegnth<string>('123')
 ```
 
+### 使用keyof 约束对象
+> 其中使用了TS泛型和泛型约束。
+> 首先定义了T类型并使用extends关键字继承object类型的子类型，
+> 然后使用keyof操作符获取T类型的所有键，
+> 它的返回 类型是联合 类型，
+> 最后利用extends关键字约束 K类型必须为keyof T联合类型的子类型
+```ts
+function prop<T, K extends keyof T>(obj: T, key: K) {
+   return obj[key]
+}
+ 
+ 
+let o = { a: 1, b: 2, c: 3 }
+ 
+prop(o, 'a') 
+prop(o, 'd') //此时就会报错发现找不到
+```
+### 泛型类
+> 声明方法跟函数类似名称后面定义<类型>
+> 使用的时候确定类型`new Sub<number>()`
+```ts
+class Sub<T>{
+   attr: T[] = [];
+   add (a:T):T[] {
+      return [a]
+   }
+}
+ 
+let s = new Sub<number>()
+s.attr = [1,2,3]
+s.add(123)
+ 
+let str = new Sub<string>()
+str.attr = ['1','2','3']
+str.add('123')
+```
