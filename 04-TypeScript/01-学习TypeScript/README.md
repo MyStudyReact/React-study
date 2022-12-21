@@ -982,3 +982,99 @@ gen(array)
 
 Symbol.unscopables
 对象，它自己拥有的属性会被with作用域排除在外。
+
+## 泛型
+**泛型在TypeScript 是很重要的东西 例如vue3 是用ts编写的 里面用到了非常多的泛型**
+### 函数泛型
+> 我写了两个函数一个是数字类型的函数，另一个是字符串类型的函数,其实就是类型不同，
+> 实现的功能是一样的，这时候我们就可以使用泛型来优化
+
+```ts
+function num (a:number,b:number) : Array<number> {
+    return [a ,b];
+}
+num(1,2)
+function str (a:string,b:string) : Array<string> {
+    return [a ,b];
+}
+str('独孤','求败')
+```
+
+#### 泛型优化 (变量类型变化)
+> 语法为函数名字后面跟一个<参数名> 参数名可以随便写 例如我这儿写了T
+> 当我们使用这个函数的时候把参数的类型传进去就可以了 （也就是动态类型）
+
+> 简而言之
+> 定义这个函数时，我不决定这些参数的类型，而是让调用者告知我这里的参数是什么类型
+
+```ts
+function Add<T>(a: T, b: T): Array<T>  {
+    return [a,b]
+}
+ 
+Add<number>(1,2)
+Add<string>('1','2')
+```
+#### 多个类型的泛型定义
+> 我们也可以使用不同的泛型参数名，只要在数量上和使用方式上能对应上就可以。
+```ts
+function Sub<T,U>(a:T,b:U):Array<T|U> {
+    const params:Array<T|U> = [a,b]
+    return params
+}
+ 
+ 
+Sub<Boolean,number>(false,1)
+```
+
+#### 定义泛型接口
+> 声明接口的时候 在名字后面加一个<参数>
+> 使用的时候传递类型
+
+```ts
+interface MyInter<T> {
+   (arg: T): T
+}
+ 
+function fn<T>(arg: T): T {
+   return arg
+}
+ 
+let result: MyInter<number> = fn
+ 
+result(123)
+```
+
+#### 对象字面量泛型
+```ts
+let foo: { <T>(arg: T): T }
+ 
+foo = function <T>(arg:T):T {
+   return arg
+}
+ 
+foo(123)
+```
+
+### 泛型约束
+> 我们期望在一个泛型的变量上面，获取其length参数，但是，有的数据类型是没有length属性的
+```ts
+function getLegnth<T>(arg:T) {
+  return arg.length
+}
+```
+
+> 这时候我们就可以使用泛型约束
+> 于是，我们就得对使用的泛型进行约束，我们约束其为具有length属性的类型，这里我们会用到interface,代码如下
+```ts
+interface Len {
+   length:number
+}
+ 
+function getLegnth<T extends Len>(arg:T) {
+  return arg.length
+}
+ 
+getLegnth<string>('123')
+```
+
