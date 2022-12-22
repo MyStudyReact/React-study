@@ -43,3 +43,6 @@ s.add(123)
 let str = new Sub<string>();
 str.attr = ['1', '2', '3']
 str.add('123')
+
+console.log({ s, str });
+
