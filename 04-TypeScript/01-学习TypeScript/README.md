@@ -1231,3 +1231,105 @@ $ tsc
 **严格模式**
 #### 10. module
 **默认common.js  可选es6模式 amd  umd 等**
+
+## namespace命名空间
+> 我们在工作中无法避免全局变量造成的污染，TypeScript提供了namespace 避免这个问题出现
+> - 内部模块，主要用于组织代码，避免命名冲突。
+> - 命名空间内的类默认私有
+> - 通过 export 暴露
+> - 通过 namespace 关键字定义
+**TypeScript与ECMAScript 2015一样，任何包含顶级import或者export的文件都被当成一个模块。**
+**相反地，如果一个文件不带有顶级的import或者export声明，那么它的内容被视为全局可见的（因此对模块也是可见的）**
+
+### 基本使用
+> 命名空间中通过export将想要暴露的部分导出(如果不用export 导出是无法读取其值的)
+> 不能用ts-node 进行编译 他不认识namespace
+```ts
+namespace a {
+    export const Time: number = 1000
+    export const fn = <T>(arg: T): T => {
+        return arg
+    }
+    fn(Time)
+}
+ 
+ 
+namespace b {
+     export const Time: number = 1000
+     export const fn = <T>(arg: T): T => {
+        return arg
+    }
+    fn(Time)
+}
+ 
+a.Time
+b.Time
+```
+
+### 嵌套命名空间
+```ts
+namespace a {
+    export namespace b {
+        export class Vue {
+            parameters: string
+            constructor(parameters: string) {
+                this.parameters = parameters
+            }
+        }
+    }
+}
+ 
+let v = a.b.Vue
+ 
+new v('1')
+```
+
+### 抽离命名空间
+> a.ts
+```ts
+export namespace V {
+    export const a = 1
+}
+``` 
+> b.ts
+```ts
+import {V} from '../observer/index'
+ 
+console.log(V);  //{a:1}
+```
+
+### 简化命名空间
+```ts
+namespace A  {
+    export namespace B {
+        export const C = 1
+    }
+}
+ 
+import X = A.B.C
+ 
+console.log(X);
+```
+
+### 合并命名空间
+> 重名的命名空间会合并
+```ts
+namespace S {
+  export const s = 4
+}
+
+namespace S {
+  export const m = 8
+}
+
+// 相当于
+// namespace S {
+//   export const s = 4
+//   export const m = 8
+// }
+
+// S.m
+// S.s
+
+console.log(S); //{ s: 4, m: 8 }
+```
