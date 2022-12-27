@@ -1873,3 +1873,81 @@ export default {
   }
 }
 ```
+
+## webpack构建TS项目
+### 安装依赖
+> 安装webpack   npm install webpack -D
+> webpack4以上需要 npm install  webpack-cli -D,否则不需要
+> 编译TS  npm install ts-loader -D
+> TS环境 npm install typescript -D
+> 热更新服务 npm install  webpack-dev-server -D,自带浏览器环境变量的
+> HTML模板 npm install html-webpack-plugin -D
+
+### 配置json文件
+
+```sh
+$ npm init -y
+```
+
+```json
+{
+  "name": "study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
+```
+
+### 配置文件 webpack.config.js
+```js
+const path = require('path')
+const htmlWebpackPlugin = require('html-webpack-plugin')
+module.exports = {
+    entry: "./src/index.ts",
+    mode: "development",
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        filename: "index.js"
+    },
+    stats: "none",
+    resolve: {
+        extensions: ['.ts', '.js'],
+        alias: {
+            '@': path.resolve(__dirname, './src')
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                use: "ts-loader"
+            }
+        ]
+    },
+    devServer: {
+        port: 1988,
+        proxy: {}
+    },
+    plugins: [
+        new htmlWebpackPlugin({
+            template: "./public/index.html"
+        })
+    ]
+}
+```
