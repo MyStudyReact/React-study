@@ -2040,3 +2040,111 @@ o.emit('abc', 2, true, '小满')
  
 // o.emit('ddd', 'addddddddd')
 ```
+
+## TS进阶用法proxy & Reflect
+### 学习proxy对象代理
+> Proxy 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）
+
+### 1. target
+> 要使用 Proxy 包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）。
+
+### 2. handler
+> 一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为。
+
+#### handler.get() 本次使用的get
+> 属性读取操作的捕捉器。
+#### handler.set() 本次使用的set
+> 属性设置操作的捕捉器。
+
+### Reflect
+> 与大多数全局对象不同Reflect并非一个构造函数，所以不能通过new运算符对其进行调用，或者将Reflect对象作为一个函数来调用。Reflect的所有属性和方法都是静态的（就像Math对象）
+
+### Reflect.get(target, name, receiver) 
+> Reflect.get方法查找并返回target对象的name属性，如果没有该属性返回undefined
+
+### Reflect.set(target, name,value, receiver) 
+> Reflect.set方法设置target对象的name属性等于value。
+
+```ts
+type Person = {
+    name: string,
+    age: number,
+    text: string
+}
+ 
+ 
+const proxy = (object: any, key: any) => {
+    return new Proxy(object, {
+        get(target, prop, receiver) {
+            console.log(`get key======>${key}`);
+            return Reflect.get(target, prop, receiver)
+        },
+ 
+        set(target, prop, value, receiver) {
+            console.log(`set key======>${key}`);
+ 
+            return Reflect.set(target, prop, value, receiver)
+        }
+    })
+}
+ 
+const logAccess = (object: Person, key: 'name' | 'age' | 'text') => {
+    return proxy(object, key)
+}
+ 
+let man: Person = logAccess({
+    name: "小满",
+    age: 20,
+    text: "我的很小"
+}, 'age')
+ 
+man.age  = 30
+ 
+console.log(man);
+```
+
+### 使用泛型+keyof优化
+```ts
+type Person = {
+    name: string,
+    age: number,
+    text: string
+}
+ 
+ 
+const proxy = (object: any, key: any) => {
+    return new Proxy(object, {
+        get(target, prop, receiver) {
+            console.log(`get key======>${key}`);
+            return Reflect.get(target, prop, receiver)
+        },
+ 
+        set(target, prop, value, receiver) {
+            console.log(`set key======>${key}`);
+ 
+            return Reflect.set(target, prop, value, receiver)
+        }
+    })
+}
+ 
+ 
+const logAccess = <T>(object: T, key: keyof T): T => {
+    return proxy(object, key)
+}
+ 
+let man: Person = logAccess({
+    name: "小满",
+    age: 20,
+    text: "我的很小"
+}, 'age')
+ 
+ 
+let man2 = logAccess({
+    id:1,
+    name:"小满2"
+}, 'name')
+ 
+man.age = 30
+ 
+console.log(man);
+```
