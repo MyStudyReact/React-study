@@ -7,12 +7,14 @@ type Person = {
 /**
  * Partial 直接变成可选操作符
  * 
- * keyof 指的是
+ * keyof 指的是 将每个key转成联合类型
  * type key = 'name' | 'age' | 'text'
  * 
  * in 是表示遍历这个key的
  * 
  * P就是遍历完的item,取名为P
+ * 
+ * T[P]索引取值的方式获取value
  */
 
 // ts Partial 内置定义
@@ -26,7 +28,7 @@ type p = Partial<Person>
 /**
  * 比如页面展示用的表单声明类型和实际跳转所需要的跳转的表单数据不完全一样，就可以用pick选一些需要的类型声明出来
  * 
- * keyof 指的是
+ * keyof 指的是 将每个key转成联合类型
  * type key = 'name' | 'age' | 'text'
  * 
  * extends 表示
