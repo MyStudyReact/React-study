@@ -3881,6 +3881,66 @@ man.age = 30
 console.log(man);
 ```
 
+### TS进阶用法Partial & Pick
+> TypeScript内置高级类型Partial Pick 
+#### Partial 
+> 看一下源码
+
+```ts
+/**
+ * Make all properties in T optional
+  将T中的所有属性设置为可选
+ */
+type Partial<T> = {
+    [P in keyof T]?: T[P];
+};
+使用前
+
+type Person = {
+    name:string,
+    age:number
+}
+ 
+type p = Partial<Person>
+转换后全部转为了可选
+
+type p = {
+    name?: string | undefined;
+    age?: number | undefined;
+}
+```
+
+**1. keyof 是干什么的？**
+> 将一个接口对象的全部属性取出来变成联合类型
+**2. in 是干什么的？**
+> in 我们可以理解成for in P 就是key 遍历  keyof T  就是联合类型的每一项
+**3. ? 是将该属性变为可选属性**
+> ？这个操作就是将每一个属性变成可选项
+**4. T[P] 是干什么的？**
+> T[P] 索引访问操作符(获取元素值)，与 JavaScript 种访问属性值的操作类似
+
+#### Pick 
+> 从类型定义T的属性中，选取指定一组属性，返回一个新的类型定义。
+
+```ts
+/**
+ * From T, pick a set of properties whose keys are in the union K
+ */
+type Pick<T, K extends keyof T> = {
+    [P in K]: T[P];
+};
+type Person = {
+    name:string,
+    age:number,
+    text:string
+    address:string
+}
+ 
+type Ex = "text" | "age"
+ 
+type A = Pick<Person,Ex>
+```
+
 ## Redux
 ### Redux介绍
 > Redux是React中使用广泛的集中状态管理工具  类比vuex之于vue 同类的工具还有mobx等
