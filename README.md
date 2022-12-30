@@ -4050,6 +4050,27 @@ type a = First<Arr>
 ```
 **道理一样的 反过来就行了**
 
+### infer 递归
+**具体思路**
+> 首先使用泛型约束 约束只能传入数组类型的东西  然后从数组中提取第一个，放入新数组的末尾，反复此操作，形成递归 满足结束条件返回该类型
+有这么一个类型
+
+```ts
+type Arr = [1, 2, 3, 4]
+```
+**希望通过一个 ts 工具变成**
+```ts
+type Arr = [4,3,2,1]
+```
+
+> 完整代码
+```ts
+type Arr = [1, 2, 3, 4]
+ 
+type ReveArr<T extends any[]> = T extends [infer First, ...infer rest] ? [...ReveArr<rest>, First] : T
+ 
+type Res = ReveArr<Arr>
+```
 
 
 ## Redux
