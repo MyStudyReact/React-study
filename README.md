@@ -4007,6 +4007,51 @@ type TTuple = [string, number];
 type ToUnion = TupleToUni<TTuple>; // string | number
 ```
 
+### infer 类型提取
+> 我们用infer 实现四个简单的例子
+
+#### 1.提取头部元素
+```ts
+type Arr = ['a','b','c']
+ 
+type First<T extends any[]> =  T extends [infer First,...any[]] ? First : []
+ 
+type a = First<Arr>
+```
+**类型参数 T 通过extends 约束 只能是数组类型，然后通过infer 声明局部 First 变量做提取，后面的元素可以是任意类型，然后把局部变量返回**
+
+#### 2.提取尾部元素
+```ts
+type Arr = ['a', 'b', 'c']
+ 
+type Last<T extends any[]> = T extends [...any[], infer Last,] ? Last : []
+ 
+type c = Last<Arr>
+```
+**其实就是反过来就可以了**
+
+#### 3.剔除第一个元素 Shift
+```ts
+type Arr = ['a','b','c']
+ 
+type First<T extends any[]> =  T extends [unknown,...infer Rest] ? Rest : []
+ 
+type a = First<Arr>
+```
+**思路就是 我们除了第一个的元素把其他的剩余元素声明成一个变量 直接返回 就实现了我们的要求 剔除第一个元素**
+
+#### 4.剔除尾部元素 pop
+```ts
+type Arr = ['a','b','c']
+ 
+type First<T extends any[]> =  T extends [...infer Rest,unknown] ? Rest : []
+ 
+type a = First<Arr>
+```
+**道理一样的 反过来就行了**
+
+
+
 ## Redux
 ### Redux介绍
 > Redux是React中使用广泛的集中状态管理工具  类比vuex之于vue 同类的工具还有mobx等
