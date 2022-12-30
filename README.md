@@ -3975,6 +3975,38 @@ type Record<K extends keyof any, T> = {
 
 **4.T 直接返回类型**
 
+### TS进阶用法infer
+**infer 是TypeScript 新增到的关键字 充当占位符**
+
+> 我们来实现一个条件类型推断的例子
+**定义一个类型 如果是数组类型 就返回 数组元素的类型 否则 就传入什么类型 就返回什么类型**
+
+```ts
+type Infer<T> = T extends Array<any> ? T[number] : T
+ 
+ 
+type A = Infer<(boolean | string)[]>
+ 
+type B = Infer<null>
+```
+
+> 使用inter 修改
+```ts
+type Infer<T> = T extends Array<infer U> ? U : T
+ 
+ 
+type A = Infer<(string | Symbol)[]>
+```
+
+> 配合元组tuple 转换 union联合类型 
+```ts
+type TupleToUni<T> = T extends Array<infer E> ? E : never
+ 
+type TTuple = [string, number];
+ 
+type ToUnion = TupleToUni<TTuple>; // string | number
+```
+
 ## Redux
 ### Redux介绍
 > Redux是React中使用广泛的集中状态管理工具  类比vuex之于vue 同类的工具还有mobx等
